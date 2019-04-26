@@ -40,6 +40,14 @@ Tensorflow Hackathon: [Link](https://tensorflow.devpost.com/)
 
 Project Plan in Google Docs: [Link](https://docs.google.com/document/d/153GR4_yngHeu6puHnFf-QMzcHXKFKgx94QIK6zLsQCI/edit?usp=sharing)
 
+## Progress
+
+| Date       | Task                                          | Comments                                                     |
+| ---------- | --------------------------------------------- | ------------------------------------------------------------ |
+| 26/04/2019 | Finished labeling Pride and Prejudice Dataset | ```./data/parsed-n-labeled-data/pnp-gutenberg-label-task -pride-and-prejudice-by-jane-austen.csv``` |
+|            |                                               |                                                              |
+|            |                                               |                                                              |
+
 
 
 ---
