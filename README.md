@@ -1,5 +1,5 @@
 # Automated Fictional Dialogue Corpus Extractor
-Harness rich human-to-human written dialogues in Project Gutenberg, to generate data for data-driven dialogue systems, aka chatbots. 
+Team: Traci. Ray, Rocco, LiJie, LingXiao, Joyce
 
 ---
 
@@ -7,10 +7,10 @@ Harness rich human-to-human written dialogues in Project Gutenberg, to generate 
 
 Harness rich human-to-human written dialogues in Project Gutenberg, to generate data for data-driven dialogue systems, aka chatbots. 
 
-**Motivation** (citing ([A Survey of Available Corpora for BuildingData-Driven Dialogue Systems](https://arxiv.org/pdf/1512.05742.pdf)))
+**Motivation**:
 
 - Spoken language in movies resembles spontaneous human spoken language (Forchini, 2009)
-- Many of the linguistic and paralinguistic features contained within the dialogues are similar to natural spoken language, including dialogue acts such as turn-taking and reciprocity (e.g. returning a greeting when greeted)
+- Many of the linguistic and paralinguistic features contained within the dialogues are similar to natural spoken language, including dialogue acts such as turn-taking and reciprocity (e.g. returning a greeting when greeted) ([A Survey of Available Corpora for BuildingData-Driven Dialogue Systems](https://arxiv.org/pdf/1512.05742.pdf))
 - Microsoft Chatbots like XiaoIce are hungry for persona-compliant data. Conversational corpora extracted from fiction can match a certain persona or theme, which is useful for empathetic chatbots like XiaoIce.
 
 **Definitions:**
@@ -34,7 +34,11 @@ Harness rich human-to-human written dialogues in Project Gutenberg, to generate 
 
 
 
+## Google Docs
 
+Tensorflow Hackathon: [Link](https://tensorflow.devpost.com/)
+
+Project Plan in Google Docs: [Link](https://docs.google.com/document/d/153GR4_yngHeu6puHnFf-QMzcHXKFKgx94QIK6zLsQCI/edit?usp=sharing)
 
 
 
