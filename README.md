@@ -5,7 +5,7 @@ Team: Traci. Ray, Rocco, LiJie, LingXiao, Joyce
 
 **More specifically:**
 
-Harness rich human-to-human written dialogues in Project Gutenberg, to generate data for data-driven dialogue systems, aka chatbots. 
+Harvest rich human-to-human written dialogues in Project Gutenberg, to generate data for data-driven dialogue systems, aka chatbots. 
 
 **Motivation**:
 
