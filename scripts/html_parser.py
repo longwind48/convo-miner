@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import nltk
-
+import re
 
 def get_soup(http_link):
     """get web page content"""
@@ -22,21 +21,21 @@ def preprocess(text):
     text = text.strip()
     return text
 
+def tokenizer(paragraph):
+    sents = tokenize_quoted_sentence(paragraph)
 
-def tokenize(paragraph_list):
-    tokenized_sents = []
-    for i in paragraph_list:
-        tokenized_sents.extend(nltk.sent_tokenize(i))
-    return tokenized_sents
-
+def tokenize_quoted_sentence(paragraph):
+    pat = r'(("[^"]*")|([^"]*))'
+    results = re.findall(pat, paragraph)
+    results = [i[0] for i in results]
+    return results
 
 def get_fiction_sentences(http_link):
     soup = get_soup(http_link)
     tag_texts = get_tag_text(soup)
     tag_texts = [preprocess(i) for i in tag_texts]
     tag_texts = [i for i in tag_texts if i]
-
-    # sentences = tokenize(tag_texts)
+    sentences = [tokenizer(i) for i in tag_texts]
     # return sentences
     return tag_texts
 
