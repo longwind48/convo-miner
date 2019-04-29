@@ -10,8 +10,12 @@ Harvest rich human-to-human written dialogues in Project Gutenberg, to generate 
 **Motivation**:
 
 - Spoken language in movies resembles spontaneous human spoken language (Forchini, 2009)
-- Many of the linguistic and paralinguistic features contained within the dialogues are similar to natural spoken language, including dialogue acts such as turn-taking and reciprocity (e.g. returning a greeting when greeted) ([A Survey of Available Corpora for BuildingData-Driven Dialogue Systems](https://arxiv.org/pdf/1512.05742.pdf))
-- Microsoft Chatbots like XiaoIce are hungry for persona-compliant data. Conversational corpora extracted from fiction can match a certain persona or theme, which is useful for empathetic chatbots like XiaoIce.
+- Many of the linguistic and paralinguistic features contained within the dialogues are similar to natural spoken language, including dialogue acts such as turn-taking and reciprocity (e.g. returning a greeting when greeted)
+- We hope that conversational corpora extracted from fiction can further stimulate research on improving chit-chat dialogue systems, and in the end crafting a more natural conversational experience for the user. (need to rephrase)
+
+**Challenge**:
+
+<write something>
 
 **Definitions:**
 
@@ -32,7 +36,19 @@ Harvest rich human-to-human written dialogues in Project Gutenberg, to generate 
 
   - A sequence of turns uninterrupted by narratives. I.e. a set of utterances
 
+**End product of Dialogue Corpus Extractor:**
 
+1. HTMLFiction-to-Utterance Parser
+
+2. Model that detects conversations among utterances and extracts (utterance, reponse) pairs
+
+3. - Input: A fiction
+
+   - Output: table containing utterance-response pairs, in the form <utterance_1, utterance_2>, where utterance_1 and utterance_2 belong in the same conversation.
+
+     
+
+---
 
 ## Google Docs
 
@@ -44,11 +60,11 @@ Pride and Prejudice html book: [Link](https://www.gutenberg.org/files/1342/1342-
 
 ## Progress
 
-| Date       | Task                                          | Comments                                                     |
-| ---------- | --------------------------------------------- | ------------------------------------------------------------ |
-| 26/04/2019 | Finished labeling Pride and Prejudice Dataset | ```./data/parsed-n-labeled-data/pnp-gutenberg-label-task -pride-and-prejudice-by-jane-austen.csv``` |
-|            |                                               |                                                              |
-|            |                                               |                                                              |
+| Date       | Status      | Task                                          | Comments                                                     |
+| ---------- | ----------- | --------------------------------------------- | ------------------------------------------------------------ |
+| 26/04/2019 | Done        | Finished labeling Pride and Prejudice Dataset | ```./data/parsed-n-labeled-data/pnp-gutenberg-label-task -pride-and-prejudice-by-jane-austen.csv``` |
+| 29/04/2019 | In-Progress | HTMLfiction parser script                     | 1. Need to write custom sentence tokenizer script, 2. Merged tokenized sentences with labels (HARD!!) |
+| 30/04/2019 | Planned     | Sentence-level NER                            |                                                              |
 
 
 
