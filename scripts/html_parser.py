@@ -19,6 +19,8 @@ def get_tag_text(soup):
 
 def preprocess(text):
     text = text.replace('\r\n', ' ')
+    text = text.replace('“', '"')
+    text = text.replace('”', '"')
     text = text.strip()
     return text
 
