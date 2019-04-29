@@ -2,3 +2,4 @@ data/Gutenberg
 data/Gutenberg.zip
 .DS_Store
 .ipynb_checkpoints
+__pycache__/
