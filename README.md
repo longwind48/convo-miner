@@ -40,6 +40,8 @@ Tensorflow Hackathon: [Link](https://tensorflow.devpost.com/)
 
 Project Plan in Google Docs: [Link](https://docs.google.com/document/d/153GR4_yngHeu6puHnFf-QMzcHXKFKgx94QIK6zLsQCI/edit?usp=sharing)
 
+Pride and Prejudice html book: [Link](https://www.gutenberg.org/files/1342/1342-h/1342-h.htm)
+
 ## Progress
 
 | Date       | Task                                          | Comments                                                     |
