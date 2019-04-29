@@ -35,8 +35,10 @@ def get_fiction_sentences(http_link):
     tag_texts = get_tag_text(soup)
     tag_texts = [preprocess(i) for i in tag_texts]
     tag_texts = [i for i in tag_texts if i]
-    sentences = tokenize(tag_texts)
-    return sentences
+
+    # sentences = tokenize(tag_texts)
+    # return sentences
+    return tag_texts
 
 
 if __name__ == "__main__":
