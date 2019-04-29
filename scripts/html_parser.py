@@ -12,9 +12,9 @@ def get_soup(http_link):
     return soup
 
 
-def get_p_tag_text(soup):
-    p_texts = [i.get_text() for i in soup.findAll('p')]
-    return p_texts
+def get_tag_text(soup):
+    texts = [i.get_text() for i in soup.findAll(['p','h2'])]
+    return texts
 
 
 def preprocess(text):
@@ -32,10 +32,10 @@ def tokenize(paragraph_list):
 
 def get_fiction_sentences(http_link):
     soup = get_soup(http_link)
-    p_texts = get_p_tag_text(soup)
-    p_texts = [preprocess(i) for i in p_texts]
-    p_texts = [i for i in p_texts if i]
-    sentences = tokenize(p_texts)
+    tag_texts = get_tag_text(soup)
+    tag_texts = [preprocess(i) for i in tag_texts]
+    tag_texts = [i for i in tag_texts if i]
+    sentences = tokenize(tag_texts)
     return sentences
 
 
