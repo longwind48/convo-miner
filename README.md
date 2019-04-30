@@ -64,7 +64,9 @@ Pride and Prejudice html book: [Link](https://www.gutenberg.org/files/1342/1342-
 | ---------- | ----------- | --------------------------------------------- | ------------------------------------------------------------ |
 | 26/04/2019 | Done        | Finished labeling Pride and Prejudice Dataset | ```./data/parsed-n-labeled-data/pnp-gutenberg-label-task -pride-and-prejudice-by-jane-austen.csv``` |
 | 29/04/2019 | In-Progress | HTMLfiction parser script                     | 1. Need to write custom sentence tokenizer script, 2. Merged tokenized sentences with labels (HARD!!) |
-| 30/04/2019 | Planned     | Sentence-level NER                            |                                                              |
+| 30/04/2019 | Cancelled   | Sentence-level NER                            | Data is has to be preprocessed too many assumptions. Preprocessed text may lose relevant information. |
+| 30/04/2019 | Done        | Prepare data ready for modeling               | Used preprocessed data from [Identification of Speakers in Novels paper](https://www.aclweb.org/anthology/P13-1129). Add new labels: '```part```', '```response```', '```not```' |
+| 30/04/2019 | Planned     | Train Multi-class Classification Model        | Use Tensorflow 2.0 and train baseline                        |
 
 
 
