@@ -7,7 +7,7 @@ Team: Traci. Ray, Rocco, LiJie, LingXiao, Joyce
 
 Harvest rich human-to-human written dialogues in Project Gutenberg, to generate data for data-driven dialogue systems, aka chatbots. 
 
-**Motivation**:
+**Motivation** (need to amend):
 
 - Spoken language in movies resembles spontaneous human spoken language (Forchini, 2009)
 - Many of the linguistic and paralinguistic features contained within the dialogues are similar to natural spoken language, including dialogue acts such as turn-taking and reciprocity (e.g. returning a greeting when greeted)
@@ -42,9 +42,9 @@ Harvest rich human-to-human written dialogues in Project Gutenberg, to generate 
 
 2. Model that detects conversations among utterances and extracts (utterance, reponse) pairs
 
-3. - Input: A fiction
+	- Input: A fiction
 
-   - Output: table containing utterance-response pairs, in the form <utterance_1, utterance_2>, where utterance_1 and utterance_2 belong in the same conversation.
+	- Output: table containing utterance-response pairs, in the form <utterance_1, utterance_2>, where utterance_1 and utterance_2 belong in the same conversation.
 
      
 
@@ -60,15 +60,18 @@ Pride and Prejudice html book: [Link](https://www.gutenberg.org/files/1342/1342-
 
 ## Progress
 
-| Date       | Status      | Task                                          | Comments                                                     |
-| ---------- | ----------- | --------------------------------------------- | ------------------------------------------------------------ |
-| 26/04/2019 | Done        | Finished labeling Pride and Prejudice Dataset | ```./data/parsed-n-labeled-data/pnp-gutenberg-label-task -pride-and-prejudice-by-jane-austen.csv``` |
-| 29/04/2019 | In-Progress | HTMLfiction parser script                     | 1. Need to write custom sentence tokenizer script, 2. Merged tokenized sentences with labels (HARD!!) |
-| 30/04/2019 | Cancelled   | Sentence-level NER                            | Data is has to be preprocessed too many assumptions. Preprocessed text may lose relevant information. |
-| 30/04/2019 | Done        | Prepare data ready for modeling               | Used same preprocessing methods with [Identification of Speakers in Novels paper](https://www.aclweb.org/anthology/P13-1129). Add new labels: '```part```', '```response```', '```not```'. Add train test split. Latest working data ready for modelling in ```./data/parsed-n-labeled-data/labeled-utterance-final-300419.csv``` |
-| 30/04/2019 | Planned     | Train Sequence Labelling Model                | Use Tensorflow 2.0 and train baseline                        |
-
-
+| Date       | Status      | Task                                                  | Comments                                                     |
+| ---------- | ----------- | ----------------------------------------------------- | ------------------------------------------------------------ |
+| 26/04/2019 | Done        | Finished labeling Pride and Prejudice dataset         | ```./data/parsed-n-labeled-data/pnp-gutenberg-label-task -pride-and-prejudice-by-jane-austen.csv``` |
+| 29/04/2019 | In-Progress | HTMLfiction parser script                             | - Need to write custom sentence tokenizer script,<br /> - Merged tokenized sentences with labels (HARD!!) |
+| 30/04/2019 | Cancelled   | Sentence BIO-style NER                                | - Data is has to be preprocessed too many assumptions. <br /> - Preprocessed text may lose relevant information. |
+| 30/04/2019 | Done        | Prepare data ready for modeling                       | - Used same preprocessing methods with [Identification of Speakers in Novels paper](https://www.aclweb.org/anthology/P13-1129). <br /> - Add new labels: '```part```', '```response```', '```not```'. <br /> - Add train test split. <br /> - Data ready for modelling in ```./data/parsed-n-labeled-data/labeled-utterance-final-300419.csv``` |
+| 30/04/2019 | In-Progress | Train Sequence Labelling Models                       | Use Tensorflow 2.0 and train baseline                        |
+| ??/05/2019 | Planned     | Script to construct (utterance, response) pairs       |                                                              |
+| ??/05/2019 | Planned     | Document, refactor and test HTMLfiction parser script |                                                              |
+| ??/05/2019 | Planned     | Manually Label more data                              | 1. One fiction from Jane Austin<br />2. One fiction from same genre, different author<br />3. One fiction from different genre, different author |
+| ??/05/2019 | Planned     | Detailed writeup on project summary and results       |                                                              |
+| 07/05/2019 | Planned     | Organize repo and submit                              |                                                              |
 
 ---
 
