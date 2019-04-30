@@ -22,16 +22,15 @@ Harvest rich human-to-human written dialogues in Project Gutenberg, to generate 
 - Utterance: 
 
   - text prefixed by an opening quote and postfixed by a closing quote, must be spoken by 1 speaker. 
-  - E.g. “You used us abominably ill,” answered Mrs. Hurst, “running away without telling us that you were coming out.” ---> contains 1 utterance. 
-
+  - E.g. ```“You used us abominably ill,” answered Mrs. Hurst, “running away without telling us that you were coming out.”``` ---> contains 1 utterance. 
+- Response:
+  - An utterance that is a reponse to a previous utterance.
 - Speaker:
 
   - Person or character that voiced the utterance. 
-
 - Narrative:
 
   - Text that is considered non-utterance. (receives a ‘N’ tag)
-
 - Conversation/Dialogue:
 
   - A sequence of turns uninterrupted by narratives. I.e. a set of utterances
@@ -42,11 +41,37 @@ Harvest rich human-to-human written dialogues in Project Gutenberg, to generate 
 
 2. Model that detects conversations among utterances and extracts (utterance, reponse) pairs
 
-	- Input: A fiction
+  - Input: A fiction
 
-	- Output: table containing utterance-response pairs, in the form <utterance_1, utterance_2>, where utterance_1 and utterance_2 belong in the same conversation.
+  - Output: table containing utterance-response pairs, in the form <utterance_1, utterance_2>, where utterance_1 and utterance_2 belong in the same conversation.
 
-     
+**Data Preparation**
+
+- For each utterance, Labels are now '```part```', '```response```', '```not```'.
+
+  - '```part```': utterance is part of last utterance, or in other words, same speaker in the same conversation
+  - '```response```': utterance is a response of last utterance, and they both belong in the same conversation
+  - '```not```': utterance is not related to last utterance, and they both belong in different conversations
+
+- For every paragraph, we tokenized them into one utterance, and substituted the narrative with a ```[N]```.
+
+  - e.g. ```<p> “You used us abominably ill,” answered Mrs. Hurst, “running away without telling us that you were coming out.” </p>``` 
+  -  Tokenized: ```You used us abominably ill, [N] running away without telling us that you were coming out.```
+
+- Assumptions:
+
+  - All utterances within a paragraph are attributed to a single speaker.  (This one-speaker-per-paragraph property is rarely violated in novels.)  (cite Hua He et. al 2013)
+  - For every utterance, we form (utterance-response) pairs if it satisfies 2 conditions:
+    - The speaker of the previous utterance is a different person.
+    - the previous utterance is in the same conversation.
+
+- Train-test-validation Split:
+
+  - Training set: All utterances in chapters 1-18, 34-61
+  - Validation set: All utterances in chapters 23-33
+  - Training set: All utterances in chapters 19-26
+
+  
 
 ---
 
