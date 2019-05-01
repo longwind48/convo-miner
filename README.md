@@ -92,8 +92,10 @@ Pride and Prejudice html book: [Link](https://www.gutenberg.org/files/1342/1342-
 | 30/04/2019 | Cancelled   | Sentence BIO-style NER                                | - Data is has to be preprocessed too many assumptions. <br /> - Preprocessed text may lose relevant information. |
 | 30/04/2019 | Done        | Prepare data ready for modeling                       | - Used same preprocessing methods with [Identification of Speakers in Novels paper](https://www.aclweb.org/anthology/P13-1129). <br /> - Add new labels: '```part```', '```response```', '```not```'. <br /> - Add train test split. <br /> - Data ready for modelling in ```./data/parsed-n-labeled-data/labeled-utterance-final-300419.csv``` |
 | 30/04/2019 | In-Progress | Train Sequence Labelling Models                       | Use Tensorflow 2.0 and train baseline                        |
+| 01/05/2019 | Done        | Prepare data in IOB format                            | ```./data/parsed-n-labeled-data/iob-labeled-tokens-final-010519.csv``` |
 | ??/05/2019 | Planned     | Script to construct (utterance, response) pairs       |                                                              |
 | ??/05/2019 | Planned     | Document, refactor and test HTMLfiction parser script |                                                              |
+| ??/05/2019 | Planned     | Setup a quick frontend to show how the tagging works  | Something like https://guillaumegenthial.github.io/serving.html |
 | ??/05/2019 | Planned     | Manually Label more data                              | 1. One fiction from Jane Austin<br />2. One fiction from same genre, different author<br />3. One fiction from different genre, different author |
 | ??/05/2019 | Planned     | Detailed writeup on project summary and results       |                                                              |
 | 07/05/2019 | Planned     | Organize repo and submit                              |                                                              |
