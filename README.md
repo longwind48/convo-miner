@@ -66,8 +66,8 @@ Harvest rich human-to-human written dialogues in Project Gutenberg, to generate 
 
   - All utterances within a paragraph are attributed to a single speaker.  (This one-speaker-per-paragraph property is rarely violated in novels.)  (cite Hua He et. al 2013)
   - For every B-I tag, we form (utterance-response) pairs if it satisfies the conditions:
-    - Pairs has to be B or I tags
-    - The distance between any pair has to be not more than 3 sentences away. 
+    - Utterances in pairs has to be B or I tags
+    - The distance between utterances in a pair has to be not more than 3 sentences away. 
 
 - Train-test-validation Split:
 
