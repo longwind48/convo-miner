@@ -124,11 +124,32 @@ def replace_narrative_w_mark(sent_list):
 
 def custom_tokenize_quotes(para):
     """ Custom tokenizer to tokenize paragraph into list of sentences, separated by utterances and narratives """
+    para = remove_period_from_honorifics(para)
     regex = r'(("[^"]*")|([^"]*))'
     results = [i[0] for i in re.findall(regex, para)]
     tag_texts = [i for i in results if i]
     new_sent_list = replace_narrative_w_mark(tag_texts)
     return new_sent_list
+
+def add_chapters(df):
+    chapter_dict = dict()
+    chapter_tag = ''
+    for i in df.index:
+        curr_chapter_tag = df.loc[i]['chapter_tag']
+        if curr_chapter_tag == '':
+            if chapter_tag != '':
+                chapter_dict[i] = chapter_tag
+            else:
+                chapter_tag = curr_chapter_tag
+                chapter_dict[i] = chapter_tag
+        else:
+            if chapter_tag == curr_chapter_tag:
+                chapter_dict[i] = chapter_tag
+            else:
+                chapter_tag = curr_chapter_tag
+                chapter_dict[i] = chapter_tag
+    return chapter_dict
+
 
 def get_fiction_sentences(http_link):
     soup = get_soup(http_link)
@@ -170,6 +191,8 @@ if __name__ == "__main__":
 
     df['raw_utter_list'] = df['para'].apply(lambda x: find_utterances_raw(x))
     df['tokenized_sent'] = df['para'].apply(lambda x: custom_tokenize_quotes(x))
+    df['chapter_tag'] = df['para'].apply(lambda x: x if 'chapter ' in x.lower() else '')
+    df['chapter_tag'] = list(x[1] for x in add_chapters(df).items())
 
     # Save as csv
     dirname = os.path.dirname('__file__')
