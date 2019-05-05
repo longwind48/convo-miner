@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Social Media Computing Mini Project</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/isotope.css', version='20032021') }}" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/flexslider.css', version='20032021') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='js/fancybox/jquery.fancybox.css', version='20032021') }}" type="text/css" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css', version='20032021') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', version='20032021') }}">
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.dataTables.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='skin/default.css', version='20032021') }}">
+
+</head>
+
+<body>
+  <section id="header" class="appear"></section>
+  <div class="navbar navbar-fixed-top" role="navigation" data-0="line-height:100px; height:100px; background-color:rgba(0,0,0,0.3);" data-300="line-height:60px; height:60px; background-color:rgba(5, 42, 62, 1);">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="fa fa-bars color-white"></span>
+        </button>
+        <div class="navbar-logo">
+          <a href="index.html"><img data-0="width:271px; height=92px;" data-300=" width:120px;" src="{{ url_for('static', filename='img/logo-color-tensorflow.png', version='20032021') }}" alt=""></a>
+        </div>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="#section-user">Target User</a></li>
+          <li><a href="#section-recommendations1">Similarity Results</a></li>
+          <li><a href="#section-recommendations2">Classification Results</a></li>
+          <li><a href="#section-about">About</a></li>
+        </ul>
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </div>
+
+  <section id="intro">
+    <div class="intro-content">
+      <h2 style="padding-top: 80px">Find Out Your Potential Friends!</h2>
+      <h3>Social Media Computing - Mini Project Demo</h3>
+      <div>
+        <a href="#section-user" class="btn-get-started scrollto">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- User -->
+  <section id="section-user" class="section pad-bot30 bg-white">
+    <div class="container">
+      <div class="row mar-bot40">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="section-header">
+            <h2 class="section-heading animated" data-animation="bounceInUp">SEARCH FICTION</h2>
+            <p>Key in the html url of the book</p>
+          </div>
+        </div>
+      </div>
+      <div class="row mar-bot40">
+        <div class="col-md-offset-3 col-md-6">
+          <form action = "/select_user" method = "POST" enctype = "multipart/form-data" >
+            <div class="form-group">
+              <label for="data"></label>
+              <input type="text" class="form-control" id="data" name="data">
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-info" id="upload_data_btn" name="submit">Gather conversations</button>&nbsp;&nbsp;
+			  {% if error1 %}
+			  	<div class = 'alert alert-danger'>
+			  		<strong>Error: {{ error1 }}</strong>
+			  	</div>
+			  {% endif %}
+			  {% if error2 %}
+			  	<div class = 'alert alert-danger'>
+			  		<strong>Error: {{ error2 }}</strong>
+			  	</div>
+			  {% endif %}
+            </div>
+          </form>
+<!--           <div class="clear"></div>
+ -->        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section-recommendations1" class="section appear clearfix">
+    <div class="container">
+
+      <div class="row mar-bot40">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="section-header">
+            <h2 class="section-heading animated" data-animation="bounceInUp">Results</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div>
+                {{ webpage|safe }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="section-about" class="section appear clearfix">
+    <div class="container">
+
+      <div class="row mar-bot40">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="section-header">
+            <h2 class="section-heading animated" data-animation="bounceInUp">Our Team</h2>
+            <p><!-- Add team description --></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-center mar-bot40">
+        <div class="col-md-6">
+          <div class="team-member">
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
+            <div class="team-detail">
+              <h4>Quan Lijie</h4>
+              <!-- <span>Web developer</span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="team-member">
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/JZ_edited.png', version='20032021') }}" alt="LI JIAZHE Photo"></figure>
+            <div class="team-detail">
+              <h4>Li Jiazhe</h4>
+              <!-- <span>Web designer</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /about -->
+
+  <section id="footer" class="section footer">
+    <div class="container">
+      <div class="row animated opacity mar-bot20" data-andown="fadeIn" data-animation="animation">
+        <div class="col-sm-12 align-center">
+          <ul class="social-network social-circle">
+            <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row align-center mar-bot20">
+        <ul class="footer-menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Get in touch</a></li>
+        </ul>
+      </div>
+      <div class="row align-center copyright">
+        <div class="col-sm-12">
+          <p>Copyright &copy; All rights reserved</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- Javascript Library Files -->
+  <script src="{{ url_for('static', filename='js/modernizr-2.6.2-respond-1.1.0.min.js', version='20032021') }}"></script>
+  <!-- <script src="{{ url_for('static', filename='js/jquery.js', version='20032021') }}"></script> -->
+  <script src="{{ url_for('static', filename='js/jquery-1.12.4.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.isotope.min.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.nicescroll.min.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/fancybox/jquery.fancybox.pack.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/skrollr.min.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.scrollTo.min.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.localScroll.min.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/stellar.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.appear.js', version='20032021') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.flexslider-min.js', version='20032021') }}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>
+
+  <!-- Datatable -->
+<!--   <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='js/datatables.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dataTables.bootstrap.min.js') }}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{{ url_for('static', filename='js/main.js', version='20032021') }}"></script>
+  <script>
+    $(document).ready(function() {
+      // Set the datatable to be shown responsively
+      $('#order_table').DataTable({
+		  "pageLength": 100,
+      "scrollX": true
+      });
+    });
+  </script>
+
+</body>
+
+</html>
