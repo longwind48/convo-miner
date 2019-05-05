@@ -1,8 +1,6 @@
 # Mining Conversations from Novels
 
-[python](https://img.shields.io/badge/python%20-3.7.1-brightgreen.svg)
-
-[tensorflow](https://img.shields.io/badge/tensorflow-2.0.0--alpha0-orange.svg)
+![python](https://img.shields.io/badge/python%20-3.7.1-brightgreen.svg) ![tensorflow](https://img.shields.io/badge/tensorflow-2.0.0--alpha0-orange.svg)
 
 insert Image
 
