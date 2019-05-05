@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Social Media Computing Mini Project</title>
+  <title>Automated Fictional Dialogue Corpus Extractor</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/isotope.css', version='20032021') }}" media="screen">
@@ -27,15 +27,14 @@
           <span class="fa fa-bars color-white"></span>
         </button>
         <div class="navbar-logo">
-          <a href="index.html"><img data-0="width:271px; height=92px;" data-300=" width:120px;" src="{{ url_for('static', filename='img/logo-color-tensorflow.png', version='20032021') }}" alt=""></a>
+          <a href="index.html"><img data-0="width:271px; height=92px;" data-300=" width:120px;" src="{{ url_for('static', filename='img/tensorflow_logo.png', version='20032021') }}" alt=""></a>
         </div>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
           <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="#section-user">Target User</a></li>
-          <li><a href="#section-recommendations1">Similarity Results</a></li>
-          <li><a href="#section-recommendations2">Classification Results</a></li>
+          <li><a href="#section-book">Select Book</a></li>
+          <li><a href="#section-result">Prediction Results</a></li>
           <li><a href="#section-about">About</a></li>
         </ul>
       </div>
@@ -43,30 +42,31 @@
     </div>
   </div>
 
-  <section id="intro">
+  <section id="intro" class="section appear clearfix">
     <div class="intro-content">
-      <h2 style="padding-top: 80px">Find Out Your Potential Friends!</h2>
-      <h3>Social Media Computing - Mini Project Demo</h3>
+      <h2 style="padding-top: 80px">Extract Conversational Data from Fictions</h2>
+      <h3>#PoweredByTF 2.0 Challenge on DevPost</h3>
       <div>
-        <a href="#section-user" class="btn-get-started scrollto">Get Started</a>
+        <a href="#section-book" class="btn-get-started scrollto">Get Started</a>
       </div>
     </div>
   </section>
 
   <!-- User -->
-  <section id="section-user" class="section pad-bot30 bg-white">
+  <section id="section-book" class="section pad-top30 pad-bot30 bg-white">
+  <!--<section id="section-book" class="section pad-bot30 bg-white">-->
     <div class="container">
       <div class="row mar-bot40">
         <div class="col-md-offset-3 col-md-6">
           <div class="section-header">
             <h2 class="section-heading animated" data-animation="bounceInUp">SEARCH FICTION</h2>
-            <p>Key in the html url of the book</p>
+            <p>Key in the html URL of the book</p>
           </div>
         </div>
       </div>
       <div class="row mar-bot40">
         <div class="col-md-offset-3 col-md-6">
-          <form action = "/select_user" method = "POST" enctype = "multipart/form-data" >
+          <form action = "/select_fiction_book" method = "POST" enctype = "multipart/form-data" >
             <div class="form-group">
               <label for="data"></label>
               <input type="text" class="form-control" id="data" name="data">
@@ -90,7 +90,14 @@
       </div>
     </div>
   </section>
-  <section>
+  <section id="section-result" class="section pad-top30 pad-bot30 appear clearfix">
+    <div class="row mar-bot40">
+        <div class="col-md-offset-3 col-md-6">
+          <div class="section-header">
+            <h2 class="section-heading animated" data-animation="bounceInUp">Prediction Results</h2>
+          </div>
+        </div>
+    </div>
       {% block content %}
       {% endblock %}
   </section>
@@ -119,7 +126,7 @@
   <!--</section>-->
 
   <!-- about -->
-  <section id="section-about" class="section appear clearfix">
+  <section id="section-about" class="section pad-top30 pad-bot30 appear clearfix bg-white">
     <div class="container">
 
       <div class="row mar-bot40">
@@ -132,7 +139,7 @@
       </div>
 
       <div class="row align-center mar-bot40">
-        <div class="col-md-6">
+        <div class="col-md-2">
           <div class="team-member">
             <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
             <div class="team-detail">
@@ -141,12 +148,48 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2">
           <div class="team-member">
-            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/JZ_edited.png', version='20032021') }}" alt="LI JIAZHE Photo"></figure>
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
             <div class="team-detail">
-              <h4>Li Jiazhe</h4>
-              <!-- <span>Web designer</span> -->
+              <h4>Quan Lijie</h4>
+              <!-- <span>Web developer</span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="team-member">
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
+            <div class="team-detail">
+              <h4>Quan Lijie</h4>
+              <!-- <span>Web developer</span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="team-member">
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
+            <div class="team-detail">
+              <h4>Quan Lijie</h4>
+              <!-- <span>Web developer</span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="team-member">
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
+            <div class="team-detail">
+              <h4>Quan Lijie</h4>
+              <!-- <span>Web developer</span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="team-member">
+            <figure class="member-photo"><img src="{{ url_for('static', filename='img/team/QLJ_edited.png', version='20032021') }}" alt="QUAN LIJIE Photo"></figure>
+            <div class="team-detail">
+              <h4>Quan Lijie</h4>
+              <!-- <span>Web developer</span> -->
             </div>
           </div>
         </div>

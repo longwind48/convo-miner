@@ -200,7 +200,9 @@ html {
 }
 
 body {
-    padding: 25px 50px;
+    color:#777;
+	background: #f7f7f7;
+	line-height: 1.6em;
     font: 18px Helvetica, Arial, sans-serif;
 }
 /*
@@ -498,6 +500,7 @@ a:hover {
 section.section {
 	margin:0;
 	padding: 80px 0 60px 0;
+	min-height: 600px;
 }
 
 .bg-white {
@@ -603,7 +606,7 @@ section.section {
   width: 100%;
   height: 60vh;
   position: relative;
-	background: url(../img/intro-background.jpg) top center;
+	background: url(../img/orange-background3.jpg) top center;
   background-size: cover;
 }
 
@@ -614,7 +617,7 @@ section.section {
 }
 
 .intro-content {
-	background: rgba(0, 0, 0, 0.4);
+	/*background: rgba(0, 0, 0, 0.4);*/
   position: absolute;
   position: absolute;
   bottom: 0;
@@ -759,6 +762,8 @@ About
 	margin: 0 0 20px 0;
 }
 .member-photo img {
+    height:80%;
+    width:80%;
 	-webkit-border-radius:50%;
 		-moz-border-radius:50%;
 			border-radius:50%;
@@ -905,7 +910,7 @@ nav#filter a {
   --- Contact ----
 =========================== */
 
-/*
+
 #contact-form {
 	position: relative;
 	z-index: 999;
@@ -1022,7 +1027,7 @@ div.cform-response-output {
 #sendmessage.show, #errormessage.show, .show {
 	display:block;
 }
-*/
+
 /* google map */
 #google-map {
   height: 315px;
@@ -1213,7 +1218,7 @@ a.socialIcon:hover, .socialHoverClass {
 /* ========================================
 Media queries
 ========================================= */
-/*
+
 @media (min-width: 959px) and (max-width: 1199px) {
 	.navbar-nav {
 		margin-top: 20px;
@@ -1260,5 +1265,5 @@ Media queries
 	.stats .col-md-3 {
 		margin-bottom: 30px;
 	}
-}*/
+}
 
