@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        html,
+        body {
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        #result{
+            -webkit-overflow-scroll: touch;
+            overflow:scroll;
+            padding:10px;
+            height:500px;
+        }
+        #top_frame{
+            width:100%;
+            height:50px;
+            color:#ffffff;
+            background-color:#052a3e;
+            <!--background-color:#1e1934;-->
+            text-align: center;
+            padding: 5px;
+            font-size: 1.2em;
+        }
+        #bottom_frame{
+            position:absolute;
+            bottom:0;
+            width:100%;
+            height:25px;
+            #ffffff;
+            background-color:#052a3e;
+            <!--background-color:#1e1934;-->
+            text-align: center;
+        }
+
+        .entities {
+             line-height: 2;
+        }
+
+        [data-entity] {
+             padding: 0.25em 0.35em;
+             margin: 0px 0.25em;
+             line-height: 1;
+             display: inline-block;
+             border-radius: 0.25em;
+             border: 1px solid;
+        }
+
+        [data-entity]::after {
+             box-sizing: border-box;
+             content: attr(data-entity);
+             font-size: 0.6em;
+             line-height: 1;
+             padding: 0.35em;
+             border-radius: 0.35em;
+             text-transform: uppercase;
+             display: inline-block;
+             vertical-align: middle;
+             margin: 0px 0px 0.1rem 0.5rem;
+        }
+
+        [data-entity][data-entity="B-START"] {
+             background: rgba(166, 226, 45, 0.2);
+             border-color: rgb(166, 226, 45);
+        }
+
+        [data-entity][data-entity="B-START"]::after {
+             background: rgb(166, 226, 45);
+        }
+
+        [data-entity][data-entity="I-START"] {
+             background: rgba(224, 0, 132, 0.2);
+             border-color: rgb(224, 0, 132);
+        }
+
+        [data-entity][data-entity="I-START"]::after {
+             background: rgb(224, 0, 132);
+        }
+
+        [data-entity][data-entity="B-OTHER"] {
+             background: rgba(67, 198, 252, 0.2);
+             border-color: rgb(67, 198, 252);
+        }
+
+        [data-entity][data-entity="B-OTHER"]::after {
+             background: rgb(67, 198, 252);
+        }
+
+        [data-entity][data-entity="I-OTHER"] {
+             background: rgba(47, 187, 171, 0.2);
+             border-color: rgb(47, 187, 171);
+        }
+
+        [data-entity][data-entity="I-OTHER"]::after {
+             background: rgb(47, 187, 171);
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="top_frame">
+    <p>Result</p>
+</div>
+<div id="result" class="entities">
+    <div>{{ webpage|safe }}</div>
+</div>
+<div id="bottom_frame"></div>
+
+</body>
+</html>

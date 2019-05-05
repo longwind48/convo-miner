@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Conversation Extraction from books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', version='20032021') }}">
+</head>
+
+<body>
+  <section id="section-user" class="section pad-bot30 bg-white">
+
+    <div class="container">
+            <h2 >SEARCH FICTION</h2>
+            <p>Key in the html url of the book</p>
+
+      <div class="row mar-bot40">
+          <form action = "/select_user" method = "POST" enctype = "multipart/form-data" >
+            <div class="form-group">
+              <label for="data"></label>
+              <input type="text" class="form-control" id="data" name="data">
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-info" id="upload_data_btn" name="submit">Gather conversations</button>&nbsp;&nbsp;
+			  {% if error1 %}
+			  	<div class = 'alert alert-danger'>
+			  		<strong>Error: {{ error1 }}</strong>
+			  	</div>
+			  {% endif %}
+			  {% if error2 %}
+			  	<div class = 'alert alert-danger'>
+			  		<strong>Error: {{ error2 }}</strong>
+			  	</div>
+			  {% endif %}
+            </div>
+          </form>
+      </div>
+    </div>
+  </section>
+
+  <section>
+      {% block content %}
+      {% endblock %}
+  </section>
+
+</body>
+
+</html>
