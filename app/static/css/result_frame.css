@@ -1,0 +1,30 @@
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#result{
+    -webkit-overflow-scroll: touch;
+    overflow:scroll;
+    padding:10px;
+    height:500px;
+}
+#top_frame{
+    width:100%;
+    height:50px;
+    color:#ffffff;
+    background-color:#1e1934;
+    text-align: center;
+    padding: 5px;
+    font-size: 1.2em;
+}
+#bottom_frame{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:25px;
+    #ffffff;
+    background-color:#1e1934;
+    text-align: center;
+}

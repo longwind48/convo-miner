@@ -3,55 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <style>
+        html,
+        body {
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        #result{
+            -webkit-overflow-scroll: touch;
+            overflow:scroll;
+            padding:10px;
+            height:500px;
+        }
+        #top_frame{
+            width:100%;
+            height:50px;
+            color:#ffffff;
+            background-color:#1e1934;
+            text-align: center;
+            padding: 5px;
+            font-size: 1.2em;
+        }
+        #bottom_frame{
+            position:absolute;
+            bottom:0;
+            width:100%;
+            height:25px;
+            #ffffff;
+            background-color:#1e1934;
+            text-align: center;
+        }
 
+        .entities {
+             line-height: 2;
+        }
 
-    html,
-    body {
-       margin:0;
-       padding:0;
-       height:100%;
-    }
-    #result{
-    -webkit-overflow-scroll: touch;
-    overflow:scroll;
-    padding:10px;
-	height:500px;
-    }
-    #top_frame{
-    width:100%;
-    height:50px;
-    color:#ffffff;
-    background-color:#1e1934;
-    text-align: center;
-	padding: 5px;
-	font-size: 1.2em;
-    }
-   #bottom_frame{
-   position:absolute;
-   bottom:0;
-    width:100%;
-    height:25px;
-    #ffffff;
-    background-color:#1e1934;
-    text-align: center;
-    }
+        [data-entity] {
+             padding: 0.25em 0.35em;
+             margin: 0px 0.25em;
+             line-height: 1;
+             display: inline-block;
+             border-radius: 0.25em;
+             border: 1px solid;
+        }
+
+        [data-entity]::after {
+             box-sizing: border-box;
+             content: attr(data-entity);
+             font-size: 0.6em;
+             line-height: 1;
+             padding: 0.35em;
+             border-radius: 0.35em;
+             text-transform: uppercase;
+             display: inline-block;
+             vertical-align: middle;
+             margin: 0px 0px 0.1rem 0.5rem;
+        }
+
+        [data-entity][data-entity="B-START"] {
+             background: rgba(166, 226, 45, 0.2);
+             border-color: rgb(166, 226, 45);
+        }
+
+        [data-entity][data-entity="B-START"]::after {
+             background: rgb(166, 226, 45);
+        }
+
+        [data-entity][data-entity="I-START"] {
+             background: rgba(224, 0, 132, 0.2);
+             border-color: rgb(224, 0, 132);
+        }
+
+        [data-entity][data-entity="I-START"]::after {
+             background: rgb(224, 0, 132);
+        }
+
+        [data-entity][data-entity="B-OTHER"] {
+             background: rgba(67, 198, 252, 0.2);
+             border-color: rgb(67, 198, 252);
+        }
+
+        [data-entity][data-entity="B-OTHER"]::after {
+             background: rgb(67, 198, 252);
+        }
+
+        [data-entity][data-entity="I-OTHER"] {
+             background: rgba(47, 187, 171, 0.2);
+             border-color: rgb(47, 187, 171);
+        }
+
+        [data-entity][data-entity="I-OTHER"]::after {
+             background: rgb(47, 187, 171);
+        }
+
     </style>
 </head>
 <body>
-<!--<p>testing result iframe</p>-->
-<!---->
+
 <div id="top_frame">
     <p>Result</p>
 </div>
-<div id="result">
+<div id="result" class="entities">
     <div>{{ webpage|safe }}</div>
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
-    <!--<div class="entities">When <mark data-entity="person">Sebastian Thrun</mark> started working on self-driving cars at <mark data-entity="org">Google</mark> in <mark data-entity="date">2007</mark>, few people outside of the company took him seriously.<br><br>“I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said <mark data-entity="person">Thrun</mark>, now the co-founder and CEO of online higher education startup <mark data-entity="org">Udacity</mark>, in an interview with <mark data-entity="person">Recode</mark> <mark data-entity="date">earlier this week</mark>.</div>-->
 </div>
 <div id="bottom_frame"></div>
 

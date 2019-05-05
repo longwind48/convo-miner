@@ -90,30 +90,33 @@
       </div>
     </div>
   </section>
-
-  <section id="section-recommendations1" class="section appear clearfix">
-    <div class="container">
-
-      <div class="row mar-bot40">
-        <div class="col-md-offset-3 col-md-6">
-          <div class="section-header">
-            <h2 class="section-heading animated" data-animation="bounceInUp">Results</h2>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-8">
-          <div class="row">
-            <div>
-                {{ webpage|safe }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+  <section>
+      {% block content %}
+      {% endblock %}
   </section>
+  <!--<section id="section-recommendations1" class="section appear clearfix">-->
+    <!--<div class="container">-->
+
+      <!--<div class="row mar-bot40">-->
+        <!--<div class="col-md-offset-3 col-md-6">-->
+          <!--<div class="section-header">-->
+            <!--<h2 class="section-heading animated" data-animation="bounceInUp">Results</h2>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="row">-->
+        <!--<div class="col-md-8">-->
+          <!--<div class="row">-->
+            <!--<div>-->
+                <!--{{ webpage|safe }}-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+    <!--</div>-->
+  <!--</section>-->
 
   <!-- about -->
   <section id="section-about" class="section appear clearfix">
