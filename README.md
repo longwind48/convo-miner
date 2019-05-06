@@ -80,7 +80,7 @@ We used *Pride and Prejudice* as our training set because it contains several ap
 
 Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
  
- The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). The architecture is from Stanford NLP [1] model by Stephen Merity [2]. The team selected fixed GloVe word embeddings [3] as the vector representation of the utterances in the pair dataset.
+ The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). The architecture is from Stanford NLP model by Stephen Merity. The team selected fixed GloVe word embeddings as the vector representation of the utterances in the pair dataset.
 
 ##### Sequence Labeling
 
@@ -118,10 +118,32 @@ The team also explored LDA, TF-IDF word2vec approach to which BERT embedding out
 
 #### References
 
-[1] Samuel R. Bowman, Gabor Angeli, Christopher Potts, and Christopher D. Manning. "A large annotated corpus for learning natural language inference," in Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP 2015), September 2015.
+[A large annotated corpus for learning natural language inference,](https://nlp.stanford.edu/pubs/snli_paper.pdf)
 
-[2] Stephen Merity. "Keras SNLI baseline example,” 4 September 2016. Retrieved at https://github.com/Smerity/keras_snli on 31 January 2017.
+[Keras SNLI baseline example](https://github.com/Smerity/keras_snli)
 
-[3] Jeffrey Pennington, Richard Socher, and Christopher D. Manning. "GloVe: Global Vectors for Word Representation," in Proceedings of the 2014 Conference on Empirical Methods In Natural Language Processing (EMNLP 2014), October 2014.
+[GloVe: Global Vectors for Word Representation,](https://nlp.stanford.edu/pubs/glove.pdf)
+
+[A Survey of Available Corpora for Building Data-Driven Dialogue Systems](https://arxiv.org/pdf/1512.05742.pdf)
+
+[10 innovative chatbots](https://www.wordstream.com/blog/ws/2017/10/04/chatbots)
+
+[Google Duplex](https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html)
+
+[The Design and Implementation of XiaoIce,an Empathetic Social Chatbot](https://arxiv.org/pdf/1812.08989.pdf)
+
+[The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems](https://arxiv.org/pdf/1506.08909.pdf)
+
+[Personalizing Dialogue Agents: I have a dog, do you have pets too?](https://arxiv.org/abs/1801.07243)
+
+[Training Millions of Personalized Dialogue Agents](https://www.topbots.com/most-important-conversational-ai-research/#ai-chat-paper-2018-4)
+
+[I Know The Feeling: Learning To converse with Empathy](https://arxiv.org/pdf/1811.00207.pdf)
+
+[Psychological, Relational, and Emotional Effects of Self-Disclosure After Conversations With a Chatbot](https://academic.oup.com/joc/article-abstract/68/4/712/5025583)
+
+[Creating an Emotion Responsive Dialogue System](https://uwspace.uwaterloo.ca/bitstream/handle/10012/14026/Vadehra_Ankit.pdf?sequence=1&isAllowed=y)
+
+[Learning Personas from Dialogue with Attentive Memory Networks](https://arxiv.org/pdf/1810.08717.pdf) 
 
 # Contact
