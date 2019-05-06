@@ -48,8 +48,6 @@ There is another way. A treasure trove of varied and life-like conversational da
 
 Furthermore, this project is also valuable for digital humanities researchers. Humanities researchers are increasingly seeing the value of obtaining large corpora to test general hypotheses. 
 
-technical writing, freelance journalism. writes fiction, poetry and screenplays in his spare time. 
-
 #### Solution Approach
 
 Identifying conversations in narrative fiction is tricky. Where does one conversation end, and another begins? Stylistic and lexical features vary greatly across literary works and time periods. For instance, in some works, speaker attribution is clear, i.e. "The car is red," she said. In others, it is not, i.e. "The car is red". "Indeed it is". More crucially, if you say . 
