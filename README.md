@@ -6,7 +6,7 @@
 
 ## Table of contents
 
-- [Introduction](#general-info)
+- [Introduction](#introduction)
   - [Quick Summary](#quick-summary)
   - [Motivation](#motivation)
   - [Why Is this a challenge?](#why-is-this-a-challenge)
@@ -15,16 +15,14 @@
   - [Preprocessing](#preprocessing)
   - [Methodology](#methodology)
     1. [Heuristic](#heuristic)
-    2. [Sequence Labeling (BERT+BiLSTM+NER)](#sequence-labeling-(bert+bilstm+ner))
+    2. [Sequence Labeling (BERT+BiLSTM+NER)](#sequence-labeling-(bert-bilstm-ner))
   - [Results](#results)
-  - [Examples](#examples)
-  - [Conclusion](#conclusion)
 - [Constructing Utterance Pairs](#constructing-utterance-pairs)
 - [Quick Start](#quick-start)
   - [Requirements](#requirements)
   - [Download Dataset](#download-dataset)
   - [Access NER visualizer](#access-ner-visualizer)
-  - [NER TF2.0 Starter Code](#ner-tf2.0-starter-code)
+  - [NER Tf-2 Starter Code](#ner-tf-2-starter-code)
 - [Resources](#resources)
   - [Embeddings](#embeddings)
   - [References](#references)
@@ -151,7 +149,7 @@ Besides experiementing with different input sizes, we also explored LDA, TF-IDF,
 
 #### Results
 
-| Model                 | Recall B-START | Precision (Utterance-Pair) | Directory                               |
+| Model                 | Recall (`B-START`) | Precision (Utterance-Pair) | Directory                               |
 | --------------------- | -------------- | -------------------------- | --------------------------------------- |
 | Convo miner heuristic | 0.50           | 0.89                       | `fiction_convo_miner/heuristic/`        |
 | BERT-BiLSTM-NER       | **0.70**       | **0.93**                   | `fiction_convo_miner/seq_labeling_ner/` |
@@ -170,11 +168,11 @@ While NER method is better than a well-thought-out heuristic, a precision of 93%
 
 Utterance pairs, or context-reponse pairs, or dialogue pairs, are often used as training data when building dialogue systems. With this in mind, we proceed to construct utterance pairs based on the conversations identified by our models.
 
-![Converting predictions to utterance pairs](/Users/i505272/OneDrive%20-%20SAP%20SE/Traci/Projects/Automated-Fictional-Dialogue-Corpus-Extractor/images/label-to-pairs.png)
+![Converting predictions to utterance pairs](./images/label-to-pairs.png)
 
 The box on the left shows a sample of our predictions, and on the right shows a sample of generated utterance pairs. 
 
-We construct utterance pairs by taking a `B-START` utterance and pair them with the next utterance in the sequence, ignoring all `O`. Continue for each utterance and stop the pairing at the utterance just before the next `B-Start`. 
+We construct utterance pairs by taking a `B-START` utterance and pair them with the next utterance in the sequence, ignoring all `O`. Continue for each utterance and stop the pairing at the utterance just before the next `B-START`. 
 
 # Future Work
 
@@ -212,7 +210,7 @@ python ner_visualizer/app.py
 
 First parse a html book by running [./fiction_convo_miner/parse.py](./fiction_convo_miner/parse.py). Then run [./fiction_convo_miner/heuristic/heuristic_rb.ipynb](./fiction_convo_miner/heuristic/heuristic_rb.ipynb)
 
-#### NER TF2.0 Starter Code
+#### NER Tf2.0 Starter Code
 
 Feel free to re-run our notebook in Google Colab. Or use it as a starter code!
 
