@@ -34,43 +34,86 @@ Abstract: xxxxx
 
 # Introduction
 
+'Begin at the beginning,' the King said gravely, 'and go on till you come to the end: then stop.' 
+
+​													- King of Hearts, Alice in Wonderland (1865)
+
 #### Quick Summary
 
 The objective of this project is to compare methods for mining **conversations** from **narrative fiction**.
 
 #### Motivation
 
-Firstly, non-goal-driven (NGD) chatbots need natural language data. A lot of it, and the richer the better. Exciting advances in NGD chatbots such as Google Duplex and Microsoft Xiaoice have been powered by deep learning models trained on rich and diverse types of conversations. For instance, XiaoIce is trained to be able to switch between 230 conversational modes or 'skills', ranging from comforting and storytelling to recommending movies after being trained on examples of conversations from each category.
+Firstly, dialogue systems need natural language data. A lot of it, and the richer the better. Exciting advances in dialogue syhstems such as Google Duplex and Microsoft Xiaoice have been powered by deep learning models trained on rich and diverse types of conversations. For instance, XiaoIce is trained to be able to switch between 230 conversational modes or 'skills', ranging from comforting and storytelling to recommending movies after being trained on examples of conversations from each category.
 
-Such data sources are hard to come by. Existing methods include mining reddit and twitter for conversational pairs and sequences. These methods face limitations because of the linguistic and content differences between online communication and regular human conversation, not to mention the negativity bias of internet content. Some teams have resorted to collecting human-generated conversational data through crowd-sourcing tools such as Amazon Mechanical Turk. Unfortunately, these methods are expensive, slow, and do not scale well.
+Such data sources are hard to come by. Existing methods include mining reddit and twitter for conversational pairs and sequences. These methods face limitations because of the linguistic and content differences between online communication and regular human conversation, not to mention the negativity bias of internet content, seen in the infamous Microsoft "Tay" bot. Some teams have resorted to collecting human-generated conversational data through crowd-sourcing tools such as Amazon Mechanical Turk. Unfortunately, these methods are expensive, slow, and do not scale well.
 
-There is another way. A treasure trove of varied and life-like conversational data lie unexplored within the  pages of narrative fiction. Conversation in literary fiction is rich and varied in ways that existing corpora are not. Research has found that many of the linguistic and paralinguistic features that drive 
+There is another way.
 
-Furthermore, this project is also valuable for digital humanities researchers. Humanities researchers are increasingly seeing the value of obtaining large corpora to test general hypotheses. 
+A treasure trove of varied and life-like conversational data lies within the pages of narrative fiction. Conversation in narrative fiction is rich and varied in ways that existing corpora are not. Research has found that many of the linguistic and paralinguistic features of dialogue in fiction  are similar to natural spoken language. They also contain different actors with different intentions and relationships to one another, which could potentially allow a data-driven dialogue system to learn to personalize itself to different users by making use of different interaction patterns. Additionally, real-life dialogue is a role-playing 'language game' of sorts between turn-taking strategic agents, and we would like data that can capture this.
+
+Furthermore, this project is also valuable for digital humanities researchers who want to conduct large-scale studies of dialogue in fiction.
 
 #### Solution Approach
 
-Identifying conversations in narrative fiction is tricky. Where does one conversation end, and another begins? Stylistic and lexical features vary greatly across literary works and time periods. For instance, in some works, speaker attribution is clear, i.e. "The car is red," she said. In others, it is not, i.e. "The car is red". "Indeed it is". More crucially, if you say . 
+Identifying conversations in narrative fiction is tricky. Where does one conversation end, and another begins? Stylistic and lexical features vary greatly across literary works and time periods. For instance, in some works, speaker attribution is clear, i.e. "The car is red," she said. In others, it is not, i.e. "The car is red". "Indeed it is". 
 
-Simply looking at consecutive utterances enclosed in quotation marks "…", "…" will not work, because some conversations are interspersed with additional narration.
+Simply picking out consecutive words enclosed in quotation marks "…", "…" will not work, because some conversations are interspersed with additional narration.
 
-Basically, there isn't a simple set of rules one can use to extract conversations. The task would also involve being able to detect very subtle and complex correlations between the narrative text and sequences of dialogue.
+Finally, and most importantly, a lot of the information about conversation in fiction is contained not in dialogue text itself, but in the exposition `{O}`. Narrative exposition may add context to the ongoing conversation. It may also signal a change in conversational or situational context and thus the beginning of a new narrative sequence. Thus, any method that looks purely at the conversational utterances is likely to fall short.
 
-
-
-#### 
+In sum, we suspect that there isn't a simple set of rules one can use to extract conversations. We propose that solving this task would  require a model that can detect very subtle and complex correlations between the narrative text and dialogue. It would also need to readily identify sequences of text. Thus, we decided to approach this problem using a sequence-labelling **Deep Learning** model implemented in **tensorflow 2.0**. We build such a model, and compare it against a set of heuristic methods.
 
 # Identifying Conversations
 
 #### Data
 
-Our data consist of three novels: *Pride and Prejudice*  and *Emma* by Jane Austen, and *Jane Eyre* by Charlotte Bronte. We use *Pride and Prejudice* as our training set, and *Emma* and *Jane Eyre* as our validation and test sets respectively.
+Our data consists of all the text in *Pride and Prejudice* by Jane Austen. We chose the novel as our data because it contains several appealing qualities. 
 
-We used *Pride and Prejudice* as our training set because it contains several appealing qualities. Firstly, it is a novel that is particularly rich in dialogue. Not only does it contain many utterance, it is a *comedy of manners*, which in litspeak basically means a novel that makes fun of social norms by playing them out in social interactions. This means that the dialogue inhabited   
+Firstly, it is a novel that is particularly rich in the relationship between dialogue and plot. A leading Austen scholar characterises her novels as "Conversational Machines", in which words are traded in a "complex role-playing game" (Morini 2009). 
 
+Secondly, it comes from a period in the history of the English language novel in which authors attempted to recreate dialogue as realistically as possible instead of the more abstract, experimental means used in later periods  (Ibid). 
 
+Thirdly, it is easily and legally accessible as in HTML from the open-source website **Project Gutenberg** as its copyright has expired. This also means that our entire development pipeline will be directly applicable to the other ~58,000 texts hosted on Project Gutenberg.
 
 #### Preprocessing
+
+We input html files containing the complete text of narrative fiction hosted on [Project Gutenberg](<https://www.gutenberg.org/>). 
+
+Then, a Python parser extracts text within ```<p>``` tags and ``<h2>`` tags and outputs a csv file with each paragraph as a row. Utterances and non-utterances are also tagged as such using a collection of simple rules.
+
+Inspired by the sequence-labelling scheme typically used in Named-Entity-Recognition, we use the following schema to assign labels to our text paragraphs:
+
+ For each utterance, we assign
+
+- `B-START` to first utterance in the conversation
+- `I-START` if it the utterance following `B-START` is by the same speaker
+- `B-OTHER ` if a speaker other than the one making the preceding utterance enters the conversation
+- `I-OTHER` if the next utterance following an utterance assigned a `B-OTHER` tag belongs to the very same speaker
+
+Note that we our approach does not track identities of speakers, only changes of speakers.
+
+If, on the other hand, a paragraph is not an utterance and is instead exposition, we assign:
+
+- `O`, which stands for "Outside"
+
+For example, the first few lines of our text will be tagged as such:
+
+```
+It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife. {O}
+
+However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered the rightful property of some one or other of their daughters. {O}
+
+“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park is let at last?” {B-START}
+
+Mr. Bennet replied that he had not. {O}
+
+“But it is,” returned she; “for Mrs. Long has just been here, and she told me all about it.” {B-OTHER}
+
+“Do you not want to know who has taken it?” cried his wife impatiently. {I-OTHER}
+```
+
+
 
 #### Methodology
 
@@ -79,7 +122,7 @@ We used *Pride and Prejudice* as our training set because it contains several ap
 ##### Sentence-pair Classification
 
 Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
- 
+
  The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). The architecture is from Stanford NLP model by Stephen Merity. The team selected fixed GloVe word embeddings as the vector representation of the utterances in the pair dataset.
 
 ##### Sequence Labeling
@@ -94,13 +137,10 @@ The team also explored LDA, TF-IDF word2vec approach to which BERT embedding out
 #### Results
 
 
-| Model                            | Recall B-START | Precision B-START | comments                           |
-| -------------------------------- | -------------- | ----------------- | ---------------------------------- |
-| Convo miner heuristic            | 0.5            | 0.909             | Non-ML                             |
-| fiction_bert_lstm_train_v1.ipynb | 0.079          | 0.500             | 1 paragraph as input, batchsize=4  |
-| fiction_bert_lstm_train_v2.ipynb | 0.55           | 0.478             | 3 paragraph as input, batchsize=4  |
-| fiction_bert_lstm_train_v3.ipynb | 0.6            | 0.429             | 4 paragraph as input, batchsize=4  |
-| fiction_bert_lstm_train_v4.ipynb | 0.611          | 0.611             | 4 paragraph as input, batchsize=16 |
+| Model                            | Recall B-START | Precision B-START | Precision (Utterance-Pair) | comments                           |
+| -------------------------------- | -------------- | ----------------- | -------------------------- | ---------------------------------- |
+| Convo miner heuristic            | 0.5            | 0.909             | 89.63                      | Non-ML                             |
+| fiction_bert_lstm_train_v4.ipynb | 0.611          | 0.611             | 93.70                      | 4 paragraph as input, batchsize=16 |
 
 #### Examples
 
