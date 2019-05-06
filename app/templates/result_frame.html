@@ -24,28 +24,30 @@
         .left-view{
             float:left;
             width:49%;
-            height:100%;
             position: relative;
 
         }
         .right-view{
             float:right;
             width:49%;
-            height:100%;
             position: relative;
 
+        }
+        .100-height{
+            height:100%
         }
         #top_frame{
             width:100%;
             height:50px;
             color:#ffffff;
             background-color:#052a3e;
-            <!--background-color:#1e1934;-->
             text-align: center;
             padding: 5px;
             font-size: 1.2em;
         }
-
+        .align-center {
+            text-align: center;
+        }
         .entities {
              line-height: 2;
         }
@@ -113,12 +115,14 @@
 <body>
 
 <div id="top_frame">
+    <div class="col-6 left-view align-center align-vertical-center">True Label</div>
+    <div class="col-6 right-view align-center align-vertical-center">Prediction</div>
 </div>
 <div id="result" class="entities">
-    <div class="col-6 left-view">
+    <div class="col-6 left-view 100-height">
         <div>{{ webpage1|safe }}</div>
     </div>
-    <div class="col-6 right-view">
+    <div class="col-6 right-view 100-height">
         <div>{{ webpage2|safe }}</div>
     </div>
 </div>

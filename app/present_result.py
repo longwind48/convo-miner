@@ -58,19 +58,17 @@ def remove_unnecessary_tags(soup):
 
 def iob_to_html_tags(http, iob_file_path):
     soup = get_soup(http)
-    soup = remove_unnecessary_tags(soup)
+    # soup = remove_unnecessary_tags(soup)
 
     df = pd.read_csv(iob_file_path)
-
+    para_index = df["para_index"].tolist()
     paragraph_cnt = 0
     div = soup.new_tag("div")
 
     for select in soup.findAll(['p', 'h2']):
         if has_text(select):
             match_df = df[df["para_index"] == paragraph_cnt].reset_index()
-            if match_df.shape[0] <= 0:
-                raise Exception("nothing found?", select)
-            else:
+            if match_df.shape[0]>0:
                 text = preprocess(select.get_text())
 
                 select.clear()
@@ -101,9 +99,19 @@ def iob_to_html_tags(http, iob_file_path):
                 if prev_end < match_df.shape[0]:
                     select.append(text[prev_end:])
                 select.append("\r\n")
-                paragraph_cnt += 1
+            paragraph_cnt += 1
             div.append(select)
     # print(div)
     return div
 
+true_label_webpage = iob_to_html_tags("http://www.gutenberg.org/files/1342/1342-h/1342-h.htm",
+                 "../data/parsed-n-labeled-data/iob-labeled-sent-final-060519.csv")
 
+pred_heuristic_webpage = iob_to_html_tags("http://www.gutenberg.org/files/1342/1342-h/1342-h.htm",
+                 "../data/parsed-n-labeled-data/iob-labeled-sent-final-060519.csv")
+
+with open("processed_html/true_label.html", "w") as file:
+    file.write(str(true_label_webpage))
+
+with open("processed_html/pred_heuristic.html", "w") as file:
+    file.write(str(pred_heuristic_webpage))

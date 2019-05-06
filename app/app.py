@@ -21,9 +21,9 @@ def home():
 def result_frame():
     global pride_prejudice_link
     page_label = iob_to_html_tags(pride_prejudice_link,
-                                  "../data/parsed-n-labeled-data/iob-labeled-sent-final-020519.csv")
+                                  "../data/parsed-n-labeled-data/iob-labeled-sent-final-060519.csv")
     page_prediction = iob_to_html_tags(pride_prejudice_link,
-                                       "../data/predicted/heuristic_pred.csv")
+                                       "../data/predicted/heuristic_pred_v2.csv")
     return render_template('result_frame.html', webpage1=page_label, webpage2=page_prediction)
 
 
