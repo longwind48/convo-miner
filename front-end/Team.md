@@ -12,7 +12,7 @@ Background in applied mathematics, specializing in machine learning, deep learni
 
 **Quan Lijie**
 
-
+Academic backgrounds in Engineering and Master in Business Analytics. Three years’ working experience in C++ development and more than one year in Python, data analytics and machine learning.
 
 **Ray Han**
 
@@ -24,7 +24,7 @@ Background in mathematics and knowledge engineering, experience in image process
 
 **Liang Lingxiao**
 
-
+Engineering background with 4 years consulting experience. Focus areas are around machine learning, value driven business analytics, stakeholder management, project / programme management.
 
 **Rocco Hu**
 
