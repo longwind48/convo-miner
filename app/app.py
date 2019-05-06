@@ -10,19 +10,19 @@ from scripts.present_result import iob_to_html_tags
 app = Flask(__name__)
 pride_prejudice_link = "http://www.gutenberg.org/files/1342/1342-h/1342-h.htm"
 
+
 @app.route('/')
 @app.route('/index.html')
 def home():
     return render_template('index.html')
-    global pride_prejudice_link
-    webpage = iob_to_html_tags(pride_prejudice_link)
-    return render_template('result_page.html', webpage1=webpage, webpage2=webpage)
+
 
 @app.route('/result_frame.html')
 def result_frame():
     global pride_prejudice_link
     webpage = iob_to_html_tags(pride_prejudice_link)
     return render_template('result_frame.html', webpage1=webpage, webpage2=webpage)
+
 
 @app.route('/start_demo', methods=['GET'])
 def get_user_id():
@@ -31,6 +31,7 @@ def get_user_id():
 
 from bs4 import BeautifulSoup
 import requests
+
 
 def get_body(http_link):
     """get web page content"""
@@ -45,4 +46,4 @@ def get_body(http_link):
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug=True)
