@@ -3,3 +3,8 @@ data/Gutenberg.zip
 .DS_Store
 .ipynb_checkpoints
 __pycache__/
+dialogue-retrieval/
+models/
+data/parsed-unlabeled-data/
+data/parsed-n-labeled-data/
+data/text-books/
