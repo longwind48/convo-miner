@@ -35,7 +35,6 @@
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="#section-book">Select Book</a></li>
           <li><a href="#section-result">Prediction Results</a></li>
-          <li><a href="#section-about">About</a></li>
         </ul>
       </div>
       <!--/.navbar-collapse -->
@@ -44,57 +43,57 @@
 
   <section id="intro" class="section appear clearfix">
     <div class="intro-content">
-      <h2 style="padding-top: 80px">Extract Conversational Data from Fictions</h2>
+      <h2 style="padding-top: 80px">Mining Conversations from Novels</h2>
       <h3>#PoweredByTF 2.0 Challenge on DevPost</h3>
       <div>
-        <a href="#section-book" class="btn-get-started scrollto">Get Started</a>
+        <a href="#section-book" class="btn-get-started scrollto">Start Demo</a>
       </div>
     </div>
   </section>
 
   <!-- User -->
-  <section id="section-book" class="section pad-top30 pad-bot30 bg-white">
-  <!--<section id="section-book" class="section pad-bot30 bg-white">-->
-    <div class="container">
-      <div class="row mar-bot40">
-        <div class="col-md-offset-3 col-md-6">
-          <div class="section-header">
-            <h2 class="section-heading animated" data-animation="bounceInUp">SEARCH FICTION</h2>
-            <p>Key in the html URL of the book</p>
-          </div>
-        </div>
-      </div>
-      <div class="row mar-bot40">
-        <div class="col-md-offset-3 col-md-6">
-          <form action = "/select_fiction_book" method = "POST" enctype = "multipart/form-data" >
-            <div class="form-group">
-              <label for="data"></label>
-              <input type="text" class="form-control" id="data" name="data">
-            </div>
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-info" id="upload_data_btn" name="submit">Gather conversations</button>&nbsp;&nbsp;
-			  {% if error1 %}
-			  	<div class = 'alert alert-danger'>
-			  		<strong>Error: {{ error1 }}</strong>
-			  	</div>
-			  {% endif %}
-			  {% if error2 %}
-			  	<div class = 'alert alert-danger'>
-			  		<strong>Error: {{ error2 }}</strong>
-			  	</div>
-			  {% endif %}
-            </div>
-          </form>
-<!--           <div class="clear"></div>
- -->        </div>
-      </div>
-    </div>
-  </section>
+  <!--<section id="section-book" class="section pad-top30 pad-bot30 bg-white">-->
+  <!--&lt;!&ndash;<section id="section-book" class="section pad-bot30 bg-white">&ndash;&gt;-->
+    <!--<div class="container">-->
+      <!--<div class="row mar-bot40">-->
+        <!--<div class="col-md-offset-3 col-md-6">-->
+          <!--<div class="section-header">-->
+            <!--<h2 class="section-heading animated" data-animation="bounceInUp">SEARCH FICTION</h2>-->
+            <!--<p>Key in the html URL of the book</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="row mar-bot40">-->
+        <!--<div class="col-md-offset-3 col-md-6">-->
+          <!--<form action = "/select_fiction_book" method = "POST" enctype = "multipart/form-data" >-->
+            <!--<div class="form-group">-->
+              <!--<label for="data"></label>-->
+              <!--<input type="text" class="form-control" id="data" name="data">-->
+            <!--</div>-->
+            <!--<div class="form-group text-center">-->
+              <!--<button type="submit" class="btn btn-info" id="upload_data_btn" name="submit">Gather conversations</button>&nbsp;&nbsp;-->
+			  <!--{% if error1 %}-->
+			  	<!--<div class = 'alert alert-danger'>-->
+			  		<!--<strong>Error: {{ error1 }}</strong>-->
+			  	<!--</div>-->
+			  <!--{% endif %}-->
+			  <!--{% if error2 %}-->
+			  	<!--<div class = 'alert alert-danger'>-->
+			  		<!--<strong>Error: {{ error2 }}</strong>-->
+			  	<!--</div>-->
+			  <!--{% endif %}-->
+            <!--</div>-->
+          <!--</form>-->
+<!--&lt;!&ndash;           <div class="clear"></div>-->
+ <!--&ndash;&gt;        </div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</section>-->
   <section id="section-result" class="section pad-top30 pad-bot30 appear clearfix">
     <div class="row mar-bot40">
         <div class="col-md-offset-3 col-md-6">
           <div class="section-header">
-            <h2 class="section-heading animated" data-animation="bounceInUp">Prediction Results</h2>
+            <h2 class="section-heading animated" data-animation="bounceInUp">Pride & Prejudice</h2>
           </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ def result_frame():
     global http_link
     webpage = iob_to_html_tags(http_link)
     # webpage = get_body(http_link)
-    return render_template('result_frame.html', webpage=webpage)
+    return render_template('result_frame.html', webpage1=webpage, webpage2=webpage)
 
 @app.route('/select_fiction_book', methods=['GET', 'POST'])
 def get_user_id():
