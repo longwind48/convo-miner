@@ -16,8 +16,8 @@ Abstract: xxxxx
   - [Preprocessing](#preprocessing)
   - [Methodology](#Methodology)
     1. [Heuristic](#Heuristic)
-    2. [Sentence-pair-Classification](#Sentence-pair-Classification)
-    3. [Sequence Labeling](#Sequence Labeling)
+    2. [Sentence-pair Classification](#Sentence-pair-Classification)
+    3. [Sequence Labeling](#Sequence-Labeling)
   - [Results](#results)
   - [Examples](#examples)
   - [Conclusion](#conclusion)
@@ -76,7 +76,7 @@ We used *Pride and Prejudice* as our training set because it contains several ap
 
 ##### Heuristic 
 
-##### Sentence-pair-Classification
+##### Sentence-pair Classification
 
 Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
  
