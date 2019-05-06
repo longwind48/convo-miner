@@ -2,7 +2,7 @@
 
 ![python](https://img.shields.io/badge/python%20-3.7.1-brightgreen.svg) ![tensorflow](https://img.shields.io/badge/tensorflow-2.0.0--alpha0-orange.svg)
 
-insert Image
+![Model Ouput](./images/image.png)
 
 Abstract: xxxxx
 
@@ -117,7 +117,11 @@ Mr. Bennet replied that he had not. {O}
 
 #### Methodology
 
-We evaluate our models using two types of metrics. Firstly, we compare the true and predicted labels of `B-START`. We then also construct utterance pairs from the predicted labels using XXX and
+We evaluate our models using two types of metrics. The first is a direct comparison of sequence labels such as `B-START`.
+
+The second is a comparison of utterance pairs built from the models predictions. Our script does so for the sequence-labeller model in the following manner:
+
+First, take a `B-START` utterance and pair them with the next utterance in the sequence, ignoring all `O`. Continue for each utterance and stop the pairing at the utterance just before the next `B-Start`
 
 ##### Heuristic 
 
