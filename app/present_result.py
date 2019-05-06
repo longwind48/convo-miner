@@ -63,7 +63,7 @@ def remove_unnecessary_tags(soup):
 
 
 def get_test_para_index():
-    df = pd.read_csv("../data/parsed-n-labeled-data/iob-labeled-sent-final-060519-v2.csv")
+    df = pd.read_csv("data/iob-labeled-sent-final-060519-v2.csv")
     test_df = df[df["split_tag"] == "test"]
     test_index = test_df["para_index"].tolist()
     return test_index
