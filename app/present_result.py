@@ -12,16 +12,19 @@ def preprocess(text):
     text = remove_period_from_honorifics(text)
     return text
 
+
 def remove_period_from_honorifics(para):
     regex = '(Miss.|Mrs.|Mr.|Ms.)'
     for i in re.findall(regex, para, flags=re.IGNORECASE):
         para = para.replace(i, i[:-1])
     return para
 
+
 def has_text(each_soup_select):
     text = each_soup_select.get_text()
     text = preprocess(text)
     return True if text else False
+
 
 def find_word_position(sentence, target_str):
     """
@@ -43,6 +46,7 @@ def find_word_position(sentence, target_str):
     if positions and len(positions) == 1:
         return positions[0]["start_pos"], positions[0]["end_pos"]
 
+
 def get_soup(http):
     # pride & prejudice
     page = requests.get(http)
@@ -51,67 +55,65 @@ def get_soup(http):
     soup = BeautifulSoup(page.content, from_encoding=encoding)
     return soup
 
+
 def remove_unnecessary_tags(soup):
     for tag in soup.find_all('blockquote'):
         tag.replaceWith('')
     return soup
+
+
+def get_test_para_index():
+    df = pd.read_csv("../data/parsed-n-labeled-data/iob-labeled-sent-final-060519-v2.csv")
+    test_df = df[df["split_tag"] == "test"]
+    test_index = test_df["para_index"].tolist()
+    return test_index
+
 
 def iob_to_html_tags(http, iob_file_path):
     soup = get_soup(http)
     # soup = remove_unnecessary_tags(soup)
 
     df = pd.read_csv(iob_file_path)
-    para_index = df["para_index"].tolist()
+    para_index = get_test_para_index()
     paragraph_cnt = 0
     div = soup.new_tag("div")
 
     for select in soup.findAll(['p', 'h2']):
         if has_text(select):
-            match_df = df[df["para_index"] == paragraph_cnt].reset_index()
-            if match_df.shape[0]>0:
-                text = preprocess(select.get_text())
+            if paragraph_cnt in para_index:
+                match_df = df[df["para_index"] == paragraph_cnt].reset_index()
+                if match_df.shape[0] > 0:
+                    text = preprocess(select.get_text())
 
-                select.clear()
-                select.append("\r\n")
+                    select.clear()
+                    select.append("\r\n")
 
-                prev_end = 0
-                for idx, row in match_df.iterrows():
-                    tokenized_sent = row["sent"]
-                    labl = row["label"]
-                    pos = find_word_position(text, tokenized_sent)
-                    if pos:
-                        start = pos[0]
-                        end = pos[1]
-                        # append non-labeled text before current label
-                        if start > prev_end:
-                            select.append(text[prev_end:start])
-                        # append current label
-                        if labl == "O":
-                            select.append(text[start:end])
-                        else:
-                            # add mark tag for B-START,I-START,B-OTHERS,I-OTHERS
-                            mark = soup.new_tag("mark")
-                            mark["data-entity"] = labl
-                            mark.append(text[start:end])
-                            select.append(mark)
-                        prev_end = end
-                # append non-labeled text after current label
-                if prev_end < match_df.shape[0]:
-                    select.append(text[prev_end:])
-                select.append("\r\n")
+                    prev_end = 0
+                    for idx, row in match_df.iterrows():
+                        tokenized_sent = row["sent"]
+                        labl = row["label"]
+                        pos = find_word_position(text, tokenized_sent)
+                        if pos:
+                            start = pos[0]
+                            end = pos[1]
+                            # append non-labeled text before current label
+                            if start > prev_end:
+                                select.append(text[prev_end:start])
+                            # append current label
+                            if labl == "O":
+                                select.append(text[start:end])
+                            else:
+                                # add mark tag for B-START,I-START,B-OTHERS,I-OTHERS
+                                mark = soup.new_tag("mark")
+                                mark["data-entity"] = labl
+                                mark.append(text[start:end])
+                                select.append(mark)
+                            prev_end = end
+                    # append non-labeled text after current label
+                    if prev_end < match_df.shape[0]:
+                        select.append(text[prev_end:])
+                    select.append("\r\n")
+                div.append(select)
             paragraph_cnt += 1
-            div.append(select)
     # print(div)
     return div
-
-true_label_webpage = iob_to_html_tags("http://www.gutenberg.org/files/1342/1342-h/1342-h.htm",
-                 "../data/parsed-n-labeled-data/iob-labeled-sent-final-060519.csv")
-
-pred_heuristic_webpage = iob_to_html_tags("http://www.gutenberg.org/files/1342/1342-h/1342-h.htm",
-                 "../data/parsed-n-labeled-data/iob-labeled-sent-final-060519.csv")
-
-with open("processed_html/true_label.html", "w") as file:
-    file.write(str(true_label_webpage))
-
-with open("processed_html/pred_heuristic.html", "w") as file:
-    file.write(str(pred_heuristic_webpage))

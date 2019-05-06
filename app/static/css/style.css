@@ -25,7 +25,10 @@ body {
 	line-height: 1.6em;
     font: 18px Helvetica, Arial, sans-serif;
 }
-min-height{
+.min-height-800{
+     min-height: 800px;
+}
+.min-height-400{
      min-height: 800px;
 }
 /*
