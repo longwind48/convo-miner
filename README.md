@@ -79,7 +79,8 @@ b. Sentence-pair Classification
 
 c. Sequence Labeling
 
-As the alternative approach, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. As one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks. To achieve good results, the team selected BERT pre-trained embedding due to the need of understanding the context
+As the alternative approach, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. As one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks. To achieve good results, the team selected BERT pre-trained embedding due to the need of understanding the context.
+
 
 
 #### Results
