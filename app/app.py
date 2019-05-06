@@ -5,7 +5,7 @@ This generates a localhost web app for demo
 # from __future__ import print_function
 # import sys
 from flask import Flask, render_template, request
-from scripts.present_result import iob_to_html_tags
+from present_result import iob_to_html_tags
 
 app = Flask(__name__)
 pride_prejudice_link = "http://www.gutenberg.org/files/1342/1342-h/1342-h.htm"
@@ -20,8 +20,11 @@ def home():
 @app.route('/result_frame.html')
 def result_frame():
     global pride_prejudice_link
-    webpage = iob_to_html_tags(pride_prejudice_link)
-    return render_template('result_frame.html', webpage1=webpage, webpage2=webpage)
+    page_label = iob_to_html_tags(pride_prejudice_link,
+                                  "../data/parsed-n-labeled-data/iob-labeled-sent-final-020519.csv")
+    page_prediction = iob_to_html_tags(pride_prejudice_link,
+                                       "../data/predicted/heuristic_pred.csv")
+    return render_template('result_frame.html', webpage1=page_label, webpage2=page_prediction)
 
 
 @app.route('/start_demo', methods=['GET'])
