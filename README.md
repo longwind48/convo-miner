@@ -15,9 +15,9 @@ Abstract: xxxxx
   - [Data](#data)
   - [Preprocessing](#preprocessing)
   - [Methodology](#Methodology)
-    1. [Heuristic](#heuristic)
-    2. [Sentence-pair Classification](#sentence-pair-classification)
-    3. [Sequence Labeling](#sequence-labeling)
+    1. [Heuristic](#Heuristic)
+    2. [Sentence-pair-Classification](#Sentence-pair-Classification)
+    3. [Sequence Labeling](#Sequence Labeling)
   - [Results](#results)
   - [Examples](#examples)
   - [Conclusion](#conclusion)
@@ -73,15 +73,16 @@ We used *Pride and Prejudice* as our training set because it contains several ap
 #### Preprocessing
 
 #### Methodology
-a. Heuristic
 
-b. Sentence-pair Classification
+##### Heuristic 
+
+##### Sentence-pair-Classification
 
 Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
  
  The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). As the key part of training preparation, the team adopted pre-trained GloVe embedding to form the vector representation of the paired utterances which are then fed into two bidirectional LSTM models end with 3 classes Dense layer with 'softmax' as activation function.
 
-c. Sequence Labeling
+##### Sequence Labeling
 
 As the alternative approach thought of, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. 
 
