@@ -77,10 +77,17 @@ a. Heuristic
 
 b. Sentence-pair Classification
 
+Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
+ 
+ The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). As the key part of training preparation, the team adopted pre-trained GloVe embedding to form the vector representation of the paired utterances which are then fed into two bidirectional LSTM models end with 3 classes Dense layer with 'softmax' as activation function.
+
 c. Sequence Labeling
 
-As the alternative approach, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. As one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks. To achieve good results, the team selected BERT pre-trained embedding due to the need of understanding the context.
+As the alternative approach thought of, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. 
 
+Being one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks. To achieve good results, the team selected BERT pre-trained embedding due to the need of understanding the context.
+
+The team also explored LDA, TF-IDF word2vec approach to which BERT embedding outperforms on the NER task.
 
 
 #### Results
