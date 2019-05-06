@@ -80,13 +80,13 @@ We used *Pride and Prejudice* as our training set because it contains several ap
 
 Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
  
- The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). As the key part of training preparation, the team adopted pre-trained GloVe embedding to form the vector representation of the paired utterances which are then fed into two bidirectional LSTM models end with 3 classes Dense layer with 'softmax' as activation function.
+ The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). The architecture is from Stanford NLP [1] model by Stephen Merity [2]. The team selected fixed GloVe word embeddings [3] as the vector representation of the utterances in the pair dataset.
 
 ##### Sequence Labeling
 
-As the alternative approach thought of, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. 
+As the alternative approach thought of, the team considered treating the issue as sentence level Named Entity Recognition problem and constructed BERT embedding+LSTM architecture. The model takes paragraphs as input and analyzes the conversation entities (as listed above) at sentence level.
 
-Being one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks. To achieve good results, the team selected BERT pre-trained embedding due to the need of understanding the context.
+Being one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks.The team selected BERT pre-trained embedding with average operator to achieve sentence level embedding on the extracted paragraphs.
 
 The team also explored LDA, TF-IDF word2vec approach to which BERT embedding outperforms on the NER task.
 
@@ -117,5 +117,11 @@ The team also explored LDA, TF-IDF word2vec approach to which BERT embedding out
 #### Embeddings
 
 #### References
+
+[1] Samuel R. Bowman, Gabor Angeli, Christopher Potts, and Christopher D. Manning. "A large annotated corpus for learning natural language inference," in Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP 2015), September 2015.
+
+[2] Stephen Merity. "Keras SNLI baseline example,” 4 September 2016. Retrieved at https://github.com/Smerity/keras_snli on 31 January 2017.
+
+[3] Jeffrey Pennington, Richard Socher, and Christopher D. Manning. "GloVe: Global Vectors for Word Representation," in Proceedings of the 2014 Conference on Empirical Methods In Natural Language Processing (EMNLP 2014), October 2014.
 
 # Contact
