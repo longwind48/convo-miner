@@ -44,7 +44,7 @@ The objective of this project is to compare methods for mining **conversations**
 
 #### Motivation
 
-Firstly, dialogue systems need natural language data. A lot of it, and the richer the better. Exciting advances in dialogue syhstems such as Google Duplex and Microsoft Xiaoice have been powered by deep learning models trained on rich and diverse types of conversations. For instance, XiaoIce is trained to be able to switch between 230 conversational modes or 'skills', ranging from comforting and storytelling to recommending movies after being trained on examples of conversations from each category.
+Firstly, dialogue systems need natural language data. A lot of it, and the richer the better. Exciting advances in dialogue systems such as Google Duplex and Microsoft Xiaoice have been powered by deep learning models trained on rich and diverse types of conversations. For instance, XiaoIce is trained to be able to switch between 230 conversational modes or 'skills', ranging from comforting and storytelling to recommending movies after being trained on examples of conversations from each category.
 
 Such data sources are hard to come by. Existing methods include mining reddit and twitter for conversational pairs and sequences. These methods face limitations because of the linguistic and content differences between online communication and regular human conversation, not to mention the negativity bias of internet content, seen in the infamous Microsoft "Tay" bot. Some teams have resorted to collecting human-generated conversational data through crowd-sourcing tools such as Amazon Mechanical Turk. Unfortunately, these methods are expensive, slow, and do not scale well.
 
@@ -62,7 +62,7 @@ Simply picking out consecutive words enclosed in quotation marks "…", "…" wi
 
 Finally, and most importantly, a lot of the information about conversation in fiction is contained not in dialogue text itself, but in the exposition `{O}`. Narrative exposition may add context to the ongoing conversation. It may also signal a change in conversational or situational context and thus the beginning of a new narrative sequence. Thus, any method that looks purely at the conversational utterances is likely to fall short.
 
-In sum, we suspect that there isn't a simple set of rules one can use to extract conversations. We propose that solving this task would  require a model that can detect very subtle and complex correlations between the narrative text and dialogue. It would also need to readily identify sequences of text. Thus, we decided to approach this problem using a sequence-labelling **Deep Learning** model implemented in **tensorflow 2.0**. We build such a model, and compare it against a set of heuristic methods.
+In sum, we suspect that there isn't a simple set of rules one can use to extract conversations. We propose that solving this task would  require a model that can detect very subtle and complex correlations between the narrative text and dialogue. It would also need to readily identify sequences of text. Thus, we decided to approach this problem using a sequence-labelling **Deep Learning** model constructed using a custom-built **BERT**+ **LSTM** architecture implemented in **tensorflow 2.0**. We compare it against a heuristic method.
 
 # Identifying Conversations
 
@@ -97,7 +97,7 @@ If, on the other hand, a paragraph is not an utterance and is instead exposition
 
 - `O`, which stands for "Outside"
 
-For example, the first few lines of our text will be tagged as such:
+For example, the first few paragraphs of our text will be tagged as such:
 
 ```
 It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife. {O}
@@ -117,13 +117,11 @@ Mr. Bennet replied that he had not. {O}
 
 #### Methodology
 
+We evaluate our models using two types of metrics. Firstly, we compare the true and predicted labels of `B-START`
+
 ##### Heuristic 
 
-##### Sentence-pair Classification
 
-Shifting to deep learning approach, the team first explored to solve the issue as a multi-class classification problem.
-
- The dataset was prepared in the format of utterance pairs which labeled classes (i.e. "not_pair", "part" and "response"). The architecture is from Stanford NLP model by Stephen Merity. The team selected fixed GloVe word embeddings as the vector representation of the utterances in the pair dataset.
 
 ##### Sequence Labeling
 
@@ -137,10 +135,18 @@ The team also explored LDA, TF-IDF word2vec approach to which BERT embedding out
 #### Results
 
 
-| Model                            | Recall B-START | Precision B-START | Precision (Utterance-Pair) | comments                           |
-| -------------------------------- | -------------- | ----------------- | -------------------------- | ---------------------------------- |
-| Convo miner heuristic            | 0.5            | 0.909             | 89.63                      | Non-ML                             |
-| fiction_bert_lstm_train_v4.ipynb | 0.611          | 0.611             | 93.70                      | 4 paragraph as input, batchsize=16 |
+| Model                            | Recall B-START | Precision (Utterance-Pair) | comments                                     |
+| -------------------------------- | -------------- | -------------------------- | -------------------------------------------- |
+| Convo miner heuristic            | 0.50           | 0.89                       | Non-ML                                       |
+| fiction_bert_lstm_train_v4.ipynb | **0.70**       | **0.93**                   | BERT + LSTM, 4 paragraph input, batchsize=16 |
+
+The table above compares the results of the 3 types of solutions we built. The NER model with the BERT + LSTM architecture is best-performing one in absolute terms across 2 metrics.
+
+The **Recall** of B-Start is the proportion true labels are correctly predicted. This means that 50% of all true labels were predicted correctly by the heuristic method. On the other hand, our NER model correctly predicts 74% of all true labels.
+
+The **Precision** of the utterance pairs 93.7%. compare to convo miner heuristic
+
+* Explain results while making reference to points made in the literature review {}
 
 #### Examples
 
