@@ -4,14 +4,13 @@
 
 insert Image
 
-Text
+Abstract: xxxxx
 
 ## Table of contents
 * [Introduction](#general-info)
-  - [TL;DR](#tl;dr)
-  - [Motivation](####motivation)
+  - [Quick Summary](#Quick-Summary)
+  - [Motivation](#motivation)
   - [Why Is this a challenge?](#why-is-the-a-challenge)
-  - [What's the point of mining conversations?]()
 * [Identifying Conversations](#identifying-conversations)
   - [Data](#data)
   - [Preprocessing](#preprocessing)
@@ -20,7 +19,8 @@ Text
     2. [Sentence-pair Classification](#sentence-pair-classification)
     3. [Sequence Labeling](#sequence-labeling)
   - [Results](#results)
-  - [Examples](##examples)
+  - [Examples](#examples)
+  - [Conclusion](#conclusion)
 * [Quick Start](#quick-start)
   - [Requirements](#requirements)
   - [Access NER visualizer](#requirements)
@@ -34,15 +34,43 @@ Text
 
 # Introduction
 
-#### TL;DR
+#### Quick Summary
+
+The objective of this project is to compare methods for mining **conversations** from **narrative fiction**.
 
 #### Motivation
 
-#### Why is this a challenge?
+Firstly, non-goal-driven (NGD) chatbots need natural language data. A lot of it, and the richer the better. Exciting advances in NGD chatbots such as Google Duplex and Microsoft Xiaoice have been powered by deep learning models trained on rich and diverse types of conversations. For instance, XiaoIce is trained to be able to switch between 230 conversational modes or 'skills', ranging from comforting and storytelling to recommending movies after being trained on examples of conversations from each category.
+
+Such data sources are hard to come by. Existing methods include mining reddit and twitter for conversational pairs and sequences. These methods face limitations because of the linguistic and content differences between online communication and regular human conversation, not to mention the negativity bias of internet content. Some teams have resorted to collecting human-generated conversational data through crowd-sourcing tools such as Amazon Mechanical Turk. Unfortunately, these methods are expensive, slow, and do not scale well.
+
+There is another way. A treasure trove of varied and life-like conversational data lie unexplored within the  pages of narrative fiction. Conversation in literary fiction is rich and varied in ways that existing corpora are not. Research has found that many of the linguistic and paralinguistic features that drive 
+
+Furthermore, this project is also valuable for digital humanities researchers. Humanities researchers are increasingly seeing the value of obtaining large corpora to test general hypotheses. 
+
+technical writing, freelance journalism. writes fiction, poetry and screenplays in his spare time. 
+
+#### Solution Approach
+
+Identifying conversations in narrative fiction is tricky. Where does one conversation end, and another begins? Stylistic and lexical features vary greatly across literary works and time periods. For instance, in some works, speaker attribution is clear, i.e. "The car is red," she said. In others, it is not, i.e. "The car is red". "Indeed it is". More crucially, if you say . 
+
+Simply looking at consecutive utterances enclosed in quotation marks "…", "…" will not work, because some conversations are interspersed with additional narration.
+
+Basically, there isn't a simple set of rules one can use to extract conversations. The task would also involve being able to detect very subtle and complex correlations between the narrative text and sequences of dialogue.
+
+
+
+#### 
 
 # Identifying Conversations
 
 #### Data
+
+Our data consist of three novels: *Pride and Prejudice*  and *Emma* by Jane Austen, and *Jane Eyre* by Charlotte Bronte. We use *Pride and Prejudice* as our training set, and *Emma* and *Jane Eyre* as our validation and test sets respectively.
+
+We used *Pride and Prejudice* as our training set because it contains several appealing qualities. Firstly, it is a novel that is particularly rich in dialogue. Not only does it contain many utterance, it is a *comedy of manners*, which in litspeak basically means a novel that makes fun of social norms by playing them out in social interactions. This means that the dialogue inhabited   
+
+
 
 #### Preprocessing
 
