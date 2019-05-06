@@ -117,7 +117,7 @@ Mr. Bennet replied that he had not. {O}
 
 #### Methodology
 
-We evaluate our models using two types of metrics. Firstly, we compare the true and predicted labels of `B-START`
+We evaluate our models using two types of metrics. Firstly, we compare the true and predicted labels of `B-START`. We then also construct utterance pairs from the predicted labels using XXX and
 
 ##### Heuristic 
 
@@ -142,11 +142,11 @@ The team also explored LDA, TF-IDF word2vec approach to which BERT embedding out
 
 The table above compares the results of the 3 types of solutions we built. The NER model with the BERT + LSTM architecture is best-performing one in absolute terms across 2 metrics.
 
-The **Recall** of B-Start is the proportion true labels are correctly predicted. This means that 50% of all true labels were predicted correctly by the heuristic method. On the other hand, our NER model correctly predicts 74% of all true labels.
+The **Recall** of B-Start is the measures the percentage of total relevant results correctly classified by the algorithm. It is calculated by taking the ratio of true labels that are correctly predicted . This means that 50% of all true labels were predicted correctly by the heuristic method. On the other hand, our sequence-labelling model correctly predicts 74% of all true labels.
 
-The **Precision** of the utterance pairs 93.7%. compare to convo miner heuristic
+The **Precision** of the utterance pairs is the proportion of predictions that are relevant. It is calculated by the proportion of true predictions over all predictions (either correct or incorrect). The precision of the sequence-labelling model, at 93%, beats the precision of the heuristic method, which stands at only 89%.
 
-* Explain results while making reference to points made in the literature review {}
+In conclusion, our theoretical motivations were validated by the results. Our NER-inspired sequence-labelling model was able to far better mine conversations from text. We suggest, in line with our theoretical convictions, that it could do so because it can take account the sequential nature of conversations in fiction as well as the highly complex correlations between narration and dialogue in the text.
 
 #### Examples
 
