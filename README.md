@@ -2,7 +2,7 @@
 
 ![python](https://img.shields.io/badge/python%20-3.7.1-brightgreen.svg) ![tensorflow](https://img.shields.io/badge/tensorflow-2.0.0--alpha0-orange.svg) ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)
 
-![Model Ouput](/Users/i505272/OneDrive%20-%20SAP%20SE/Traci/Projects/Automated-Fictional-Dialogue-Corpus-Extractor/images/image.png)
+![Model Ouput](./images/image.png)
 
 ## Table of contents
 
