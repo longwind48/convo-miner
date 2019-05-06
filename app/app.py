@@ -8,35 +8,26 @@ from flask import Flask, render_template, request
 from scripts.present_result import iob_to_html_tags
 
 app = Flask(__name__)
-http_link = None
+pride_prejudice_link = "http://www.gutenberg.org/files/1342/1342-h/1342-h.htm"
 
 @app.route('/')
-# @app.route('/base.html')
 @app.route('/index.html')
 def home():
-    # return render_template('base.html')
     return render_template('index.html')
+    global pride_prejudice_link
+    webpage = iob_to_html_tags(pride_prejudice_link)
+    return render_template('result_page.html', webpage1=webpage, webpage2=webpage)
 
 @app.route('/result_frame.html')
 def result_frame():
-    global http_link
-    webpage = iob_to_html_tags(http_link)
-    # webpage = get_body(http_link)
+    global pride_prejudice_link
+    webpage = iob_to_html_tags(pride_prejudice_link)
     return render_template('result_frame.html', webpage1=webpage, webpage2=webpage)
 
-@app.route('/select_fiction_book', methods=['GET', 'POST'])
+@app.route('/start_demo', methods=['GET'])
 def get_user_id():
-    global http_link
-    if request.method == 'POST':
-        http_link = request.form['data']
-        if http_link == '':
-            error = 'html page is keyed in'
-            return render_template('result_page.html', error1=error)
-        if http_link:
-            return render_template('result_page.html')
-#        if data:
-#            result = analyze_user(data)
-#            return render_template('index.html', table = table)
+    return render_template('result_page.html')
+
 
 from bs4 import BeautifulSoup
 import requests
@@ -52,18 +43,6 @@ def get_body(http_link):
     # body['id'] = 'webpage'
     return body
 
-# @app.route('/')
-# def analyze_user():
-#     model = Model(selected_user)
-#     result1 = model.analyze_recommend1()
-#     result2 = model.analyze_recommend2()
-#     # print("result", type(result), file=sys.stderr)
-#     # print("result glimpse", result.head, file=sys.stderr)
-#
-#     table1 = re.sub(' order_table', '" id="RC_table', result1.to_html(classes='table table-bordered table-striped table-hover text-left order_table', index=False))
-#     table2 = re.sub(' order_table', '" id="RC_table', result2.to_html(classes='table table-bordered table-striped table-hover text-left order_table', index=False))
-#     tables = [table1, table2]
-#     return tables
 
 if __name__ == '__main__':
     app.run(debug = True)
