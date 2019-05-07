@@ -17,9 +17,7 @@
   - [Methodology](#methodology)
     1. [Heuristic](#heuristic)
     2. [Sequence Labeling (BERT+BiLSTM+NER)](#sequence-labeling-(bert-bilstm-ner))
-
-* [Results](#results)
-
+- [Results](#results)
 - [Constructing Utterance Pairs](#constructing-utterance-pairs)
 - [Conclusion](#conclusion)
   - [Closing Thoughts](#closing-thoughts)
@@ -27,8 +25,8 @@
 - [Quick Start](#quick-start)
   - [Requirements](#requirements)
   - [Download Dataset](#download-dataset)
-  - [Access NER visualizer](#access-ner-visualizer)
-  - [Seq-Labeling TF-2.0 Starter Code](#ner-tf-2-starter-code)
+  - [Access Sequence-Labeling Visualizer](#access-sequence-labeling-visualizer)
+  - [Seq-Labeling TF-2.0 Starter Code](#seq-labeling-tf-2.0-starter-code)
 - [Resources](#resources)
   - [Embeddings](#embeddings)
   - [References](#references)
@@ -236,14 +234,14 @@ pip install -r requirements.txt
 We built a simple visualization tool for displaying our model predictions and heuristic predictions. Load it up!
 
 ```
-python ner_visualizer/app.py
+python seq_label_visualizer/app.py
 ```
 
 #### Heuristic Code
 
 First parse a html book by running [./fiction_convo_miner/parse.py](./fiction_convo_miner/parse.py). Then run [./fiction_convo_miner/heuristic/heuristic_rb.ipynb](./fiction_convo_miner/heuristic/heuristic_rb.ipynb)
 
-#### NER Tf2.0 Starter Code
+#### Seq Labeling TF-2.0 Starter Code
 
 Feel free to re-run our notebook in Google Colab. Or use it as a starter code!
 
