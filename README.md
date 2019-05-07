@@ -16,8 +16,13 @@
   - [Methodology](#methodology)
     1. [Heuristic](#heuristic)
     2. [Sequence Labeling (BERT+BiLSTM+NER)](#sequence-labeling-(bert-bilstm-ner))
-  - [Results](#results)
+
+* [Results](#results)
+
 - [Constructing Utterance Pairs](#constructing-utterance-pairs)
+- [Conclusion](#conclusion)
+  - [Closing Thoughts](#closing-thoughts)
+  - [Future Work](#future-work)
 - [Quick Start](#quick-start)
   - [Requirements](#requirements)
   - [Download Dataset](#download-dataset)
@@ -32,7 +37,7 @@
 
 # Introduction
 
-'Begin at the beginning,' the King said gravely, 'and go on till you come to the end: then stop.' 
+*'Begin at the beginning,' the King said gravely, 'and go on till you come to the end: then stop.'* 
 
 ​													- King of Hearts, Alice in Wonderland (1865)
 
@@ -58,7 +63,7 @@ Identifying conversations in narrative fiction is tricky. Where does one convers
 
 Simply picking out consecutive words enclosed in quotation marks "…", "…" will not work, because some conversations are interspersed with additional narration.
 
-Finally, and most importantly, a lot of the information about conversation in fiction is contained not in dialogue text itself, but in the exposition `{O}`. Narrative exposition may add context to the ongoing conversation. It may also signal a change in conversational or situational context and thus the beginning of a new narrative sequence. Thus, any method that looks purely at the conversational utterances is likely to fall short.
+Finally, and most importantly, a lot of the information about conversation in fiction is contained not in dialogue text itself, but in the exposition. Narrative exposition may add context to the ongoing conversation. It may also signal a change in conversational or situational context and thus the beginning of a new narrative sequence. Thus, any method that looks purely at the conversational utterances is likely to fall short.
 
 # Identifying Conversations
 
@@ -121,7 +126,7 @@ Mr. Bennet replied that he had not. {O}
 
 It is clear that there isn't a simple set of rules one can use to extract conversations. We propose that solving this task would require a model that can detect very subtle and complex correlations between the narrative text and dialogue. It would also need to readily identify sequences of text. 
 
-Thus, we decided to model this problem as a **Named Entity Recognition** task. We trained several sequence-labeling models implemented in **Tensorflow 2.0**. We compare it against a **heuristic**.
+Thus, we decided to model this problem as an NER-inspired sequence-labelling task. We trained several sequence-labeling models implemented in **TensorFlow 2.0**. We compare it against a **heuristic**.
 
 We evaluate our models using two types of metrics. 
 
@@ -141,7 +146,7 @@ We hope to design a usable heuristic, which is able to reliably parse and identi
 
 ##### Sequence Labeling (BERT-BiLSTM-NER)
 
-As the alternative approach thought of, we considered treating the issue as sentence-level Named Entity Recognition problem and constructed a BERT embedding+BiLSTM architecture. The model takes 4 paragraphs as input and analyzes the conversation entities (as listed above) at sentence level.
+Our main approach uses a BERT embedding+BiLSTM architecture to perform a sentence-level sequence-labelling task. The model takes 4 paragraphs as input and analyzes the conversation entities (as listed above) at sentence level.
 
 Being one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks.The team selected BERT pre-trained embeddings with average operator to achieve sentence level embedding on the extracted paragraphs.
 
@@ -154,13 +159,13 @@ Besides experiementing with different input sizes, we also explored LDA, TF-IDF,
 | Convo miner heuristic | 0.50           | 0.89                       | `fiction_convo_miner/heuristic/`        |
 | BERT-BiLSTM-NER       | **0.70**       | **0.93**                   | `fiction_convo_miner/seq_labeling_ner/` |
 
-The table above compares the results of the 3 types of solutions we built. The NER model with the BERT + BiLSTM architecture is best-performing one in absolute terms across 2 metrics.
+The table above compares the results of the 2 types of solutions we built. The sequence-labelling model with the BERT + BiLSTM architecture is best-performing one in absolute terms across 2 metrics.
 
 The **Recall** of `B-START` measures the percentage of total relevant results correctly classified by the algorithm. This means that 50% of all true labels were predicted correctly by the heuristic method. On the other hand, our sequence-labelling model correctly predicts 70% of all true labels. In other words, the NER model correctly identified 70% of all conversation starters.
 
 The **Precision** of the utterance pairs is the proportion of predicted pairs that are relevant. At 89%, the heuristic managed to capture 89% meaningful utterance pairs, with the remaining 11% to be falsely paired utterances. The precision of the sequence-labelling model sits at 93%, beating the precision of the heuristic. 
 
-In conclusion, our theoretical motivations were validated by the results. Our NER-inspired sequence-labelling model was able to far better mine conversations from text. We suggest, in line with our theoretical convictions, that it could do so because it can take account the sequential nature of conversations in fiction as well as the highly complex correlations between narration and dialogue in the text. 
+In conclusion, our theoretical motivations were validated by the results. Our sequence-labelling model was able to far better mine conversations from text. We suggest, in line with our theoretical convictions, that it could do so because it can take account the sequential nature of conversations in fiction as well as the highly complex correlations between narration and dialogue in the text. 
 
 While NER method is better than a well-thought-out heuristic, a precision of 93% also mean that 7% of pairs generated are false. We must continue to question ourselves on the implication of using conversations from literary fiction. It may be a treasure trove, but our experiment was conveniently isolated to one fiction. We hoped to attend to bigger concerns, in applying transfer learning across different types fiction.
 
@@ -174,17 +179,26 @@ The box on the left shows a sample of our predictions, and on the right shows a 
 
 We construct utterance pairs by taking a `B-START` utterance and pair them with the next utterance in the sequence, ignoring all `O`. Continue for each utterance and stop the pairing at the utterance just before the next `B-START`. 
 
-# Future Work
 
-- Write Tests for parser and heuristic. 
-- Evaluate probability of transfer learning across different types of fiction, to generate conversations that appeal to a particular theme.
-- Open-source a large-scale conversational corpora in fiction.
+
+# Conclusion
 
 #### Closing Thoughts
 
-We are heavily inspired by empathetic XiaoIce, and human-like Google Duplex. We also salute chatbots that are applied for the social good, such as the Endurance chatbot, built for patients with dementia, and creative storytelling-chatbots. All of these fascinating chatbots are made possible with data mined from human-to-human interactions. To cope with the cost and time-consuming effort needed, we hope our attempt in investigating the viability of mining fictional conversational data has introduced new possibilities for the chatbot community. 
+Identifying conversations from narrative fiction seemed like a difficult, even insurmountable problem. However, our model was surprisingly successful, and can identify the beginnings of conversations 70% of the time.
 
-We are open to comments and feedback on our approach and results!
+Our experiment has provides evidence for the idea that sequence-labelling performed by the latest deep-learning methods outperform heuristics for extracting conversations from narrative fiction. The combination of the LSTM and Transformer architectures allows the model to capture both the highly complex syntactic and morphological aspects of speech and their sequential nature.
+
+There remain challenges and limitations to our approach. Our data, *Pride and Prejudice*, presents dialogue in a rather straightforward and regular fashion, with utterances enclosed in quotation marks separated out into distinct paragraphs. To create a model that generalizes properly to more types of fiction, we will have to train the model on more diverse types of text to achieve a truly general conversational miner model.
+
+In sum, it is an exciting time to be in dialogue systems. We can now engineer systems to be empathetic (XiaoIce), speak with human-like expressive range (Google Duplex), communicate with Dementia (Endurance) and tell stories (Talk to Judy). At the core of these advances are deep learning architectures trained on large and highly-curated samples of conversational data. We hope that our model would help support further advances by introducing a scalable means of extracting more of such data from literary fiction.
+
+#### Future Work
+
+- Write Tests for the parser and heuristic scripts.
+- Label more examples of different types of narrative fiction and train the model on them for better generalization results.
+- Evaluate possible ways to apply DL approaches across different types of fiction in order to generate conversations that contain specific properties (theme, mood, personality etc.)
+- Applying our model on more of the 58,000 texts in Project Gutenberg to generate large-scale conversational corpora from fiction. We will then Open-Source the data for future researchers/engineers.
 
 # Quick Start
 
@@ -198,7 +212,7 @@ pip install -r requirements.txt
 
 [Pride and Prejudice Labeled data](https://github.com/longwind48/Automated-Fictional-Dialogue-Corpus-Extractor/blob/master/data/labeled/iob-labeled-sent-final-060519-v2.csv)
 
-#### Access NER Visualizer
+#### Access Sequence-Labeling Visualizer
 
 We built a simple visualization tool for displaying our model predictions and heuristic predictions. Load it up!
 
