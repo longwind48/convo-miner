@@ -12,6 +12,7 @@
   - [Why Is this a challenge?](#why-is-this-a-challenge)
 - [Identifying Conversations](#identifying-conversations)
   - [Data](#data)
+  - [Definitions](#definitions)
   - [Preprocessing](#preprocessing)
   - [Methodology](#methodology)
     1. [Heuristic](#heuristic)
@@ -27,7 +28,7 @@
   - [Requirements](#requirements)
   - [Download Dataset](#download-dataset)
   - [Access NER visualizer](#access-ner-visualizer)
-  - [NER Tf-2 Starter Code](#ner-tf-2-starter-code)
+  - [Seq-Labeling TF-2.0 Starter Code](#ner-tf-2-starter-code)
 - [Resources](#resources)
   - [Embeddings](#embeddings)
   - [References](#references)
@@ -49,7 +50,7 @@ The objective of this project is to compare methods for mining **conversations**
 
 Firstly, dialogue systems need natural language data. A lot of it, and the richer the better. Exciting advances in dialogue systems such as Google Duplex and Microsoft Xiaoice have been powered by deep learning models trained on rich and diverse types of conversations. For instance, XiaoIce is trained to be able to switch between 230 conversational modes or 'skills', ranging from comforting and storytelling to recommending movies after being trained on examples of conversations from each category.
 
-Such data sources are hard to come by. Existing methods include mining reddit and twitter for conversational pairs and sequences. These methods face limitations because of the linguistic and content differences between online communication and regular human conversation, not to mention the negativity bias of internet content, seen in the infamous Microsoft "Tay" bot. Some teams have resorted to collecting human-generated conversational data through crowd-sourcing tools such as Amazon Mechanical Turk. Unfortunately, these methods are expensive, slow, and do not scale well.
+Such data sources are hard to come by. Existing methods include mining reddit and twitter for conversational pairs and sequences. These methods face limitations because of the linguistic and content differences between online communication and regular human conversation, not to mention the negativity bias of internet content, seen in the infamous Microsoft "Tay" bot. Some teams have turned to collecting human-generated conversational data through crowd-sourcing tools such as Amazon Mechanical Turk. Unfortunately, these methods are expensive, slow, and do not scale well.
 
 There is another way.
 
@@ -77,11 +78,28 @@ Firstly, it is a novel that is particularly rich in the relationship between dia
 
 Secondly, it comes from a period in the history of the English language novel in which authors attempted to recreate dialogue as realistically as possible instead of the more abstract, experimental means used in later periods. 
 
-Thirdly, it is easily and legally accessible as in HTML from the open-source website **Project Gutenberg** as its copyright has expired. This also means that our entire development pipeline will be directly applicable to the other ~58,000 texts hosted on Project Gutenberg.
+Thirdly, it is easily and legally accessible as in HTML from the open-source website **[Project Gutenberg](<https://www.gutenberg.org/>)** as its copyright has expired. This also means that our entire development pipeline will be directly applicable to the other ~58,000 texts hosted on Project Gutenberg.
+
+#### Definitions
+
+- Utterance: 
+  - text prefixed by an opening quote and postfixed by a closing quote, must be spoken by 1 speaker. 
+  - E.g. ```“You used us abominably ill,” answered Mrs. Hurst, “running away without telling us that you were coming out.”``` ---> contains 2 utterances. 
+- Response:
+  - An utterance that is a reponse to a previous utterance.
+- Speaker:
+
+  - Person or character that voiced the utterance. 
+- Narrative/Exposition:
+
+  - Text that is considered non-utterance.
+- Conversation/Dialogue:
+
+  - A series of utterances that are made in response to each other
 
 #### Preprocessing
 
-We input html files containing the complete text of narrative fiction hosted on [Project Gutenberg](<https://www.gutenberg.org/>). 
+We input html files containing the complete text of narrative fiction hosted on Project Gutenberg. 
 
 Then, a Python parser extracts text within ```<p>``` tags and ``<h2>`` tags and outputs a csv file with each paragraph as a row. Utterances and non-utterances are also tagged as such using a collection of simple rules.
 
@@ -110,8 +128,9 @@ However little known the feelings or views of such a man may be on his first ent
 neighbourhood, this truth is so well fixed in the minds of the surrounding families, that 
 he is considered the rightful property of some one or other of their daughters. {O}
 
-“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park 
-is let at last?” {B-START}
+“My dear Mr. Bennet,” {B-START} 
+said his lady to him one day, {O} 
+“have you heard that Netherfield Park is let at last?” {I-START}
 
 Mr. Bennet replied that he had not. {O}
 
@@ -146,9 +165,9 @@ We hope to design a usable heuristic, which is able to reliably parse and identi
 
 ##### Sequence Labeling (BERT-BiLSTM-NER)
 
-Our main approach uses a BERT embedding+BiLSTM architecture to perform a sentence-level sequence-labelling task. The model takes 4 paragraphs as input and analyzes the conversation entities (as listed above) at sentence level.
+Our main approach uses a BERT embedding+BiLSTM architecture to perform sequence-labelling at the sentence-level. The model takes 4 paragraphs as input and analyzes the conversation entities (as listed above) at the sentence level.
 
-Being one of the latest state-of-art algorithm, BERT applies bidirectional transformer training on the language model which gives one of the best pre-trained embedding available across many NLP tasks.The team selected BERT pre-trained embeddings with average operator to achieve sentence level embedding on the extracted paragraphs.
+The latest state-of-art DL architecture for generating language representations, BERT trains a language model by applying a bidirectional transformer on the training data. It gives one of the best pre-trained embedding available across many NLP tasks. The team selected BERT pre-trained embeddings with average operator to achieve sentence level embedding on the extracted paragraphs.
 
 Besides experiementing with different input sizes, we also explored LDA, TF-IDF, doc2vec approach to which BERT embedding outperforms on the NER task. 
 
@@ -165,9 +184,9 @@ The **Recall** of `B-START` measures the percentage of total relevant results co
 
 The **Precision** of the utterance pairs is the proportion of predicted pairs that are relevant. At 89%, the heuristic managed to capture 89% meaningful utterance pairs, with the remaining 11% to be falsely paired utterances. The precision of the sequence-labelling model sits at 93%, beating the precision of the heuristic. 
 
-In conclusion, our theoretical motivations were validated by the results. Our sequence-labelling model was able to far better mine conversations from text. We suggest, in line with our theoretical convictions, that it could do so because it can take account the sequential nature of conversations in fiction as well as the highly complex correlations between narration and dialogue in the text. 
+In conclusion, our theoretical hunches were validated by the results. Our sequence-labelling model was able to far better mine conversations from text. We suggest that it could do so because it can take account the sequential nature of conversations in fiction as well as the highly complex correlations between narration and dialogue in the text. 
 
-While NER method is better than a well-thought-out heuristic, a precision of 93% also mean that 7% of pairs generated are false. We must continue to question ourselves on the implication of using conversations from literary fiction. It may be a treasure trove, but our experiment was conveniently isolated to one fiction. We hoped to attend to bigger concerns, in applying transfer learning across different types fiction.
+While the sequence-labelling approach is better than a well-thought-out heuristic, a precision of 93% also mean that 7% of pairs generated are false. We must continue to question ourselves on the implication of using conversations from literary fiction. It may be a treasure trove, but our experiment was conveniently isolated to one fiction. We hoped to attend to bigger concerns, in applying transfer learning across different types fiction.
 
 # Constructing Utterance Pairs
 
@@ -185,9 +204,9 @@ We construct utterance pairs by taking a `B-START` utterance and pair them with 
 
 #### Closing Thoughts
 
-Identifying conversations from narrative fiction seemed like a difficult, even insurmountable problem. However, our model was surprisingly successful, and can identify the beginnings of conversations 70% of the time.
+Identifying conversations from narrative fiction seemed like a difficult problem. However, our model was surprisingly successful, and can identify the beginnings of conversations 70% of the time.
 
-Our experiment has provides evidence for the idea that sequence-labelling performed by the latest deep-learning methods outperform heuristics for extracting conversations from narrative fiction. The combination of the LSTM and Transformer architectures allows the model to capture both the highly complex syntactic and morphological aspects of speech and their sequential nature.
+Our experiment has provides evidence for the idea that sequence-labelling performed by the latest deep-learning methods outperform heuristics for extracting conversations from narrative fiction. The combination of the bi-LSTM and Transformer architectures allows the model to capture both the highly complex syntactic and morphological aspects of speech and their sequential nature.
 
 There remain challenges and limitations to our approach. Our data, *Pride and Prejudice*, presents dialogue in a rather straightforward and regular fashion, with utterances enclosed in quotation marks separated out into distinct paragraphs. To create a model that generalizes properly to more types of fiction, we will have to train the model on more diverse types of text to achieve a truly general conversational miner model.
 
@@ -236,6 +255,8 @@ Feel free to re-run our notebook in Google Colab. Or use it as a starter code!
 
 # Resources
 
+This list is a non-exhaustive list of the main sources of information we used in doing this project.
+
 #### Embeddings
 
 [GloVe: Global Vectors for Word Representation,](https://nlp.stanford.edu/pubs/glove.pdf)
@@ -272,6 +293,8 @@ Feel free to re-run our notebook in Google Colab. Or use it as a starter code!
 
 [Learning Personas from Dialogue with Attentive Memory Networks](https://arxiv.org/pdf/1810.08717.pdf) 
 
+[Identification of Speakers in Novels](https://www.aclweb.org/anthology/P13-1129)
+
 # Contact
 
-[Traci](longwind48@gmail.com), [Joyce](), [LiJie](), [Rocco](), [LingXiao](), [Ray](geledek@gmail.com)
+[Traci](longwind48@gmail.com), [Joyce](), [LiJie](), [Rocco](roccojhu@gmail.com), [LingXiao](), [Ray](geledek@gmail.com)
